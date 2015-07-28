@@ -1,0 +1,93 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+{% load static %}
+{% endblock %}
+
+{% block main_content %}
+    <img src="{% static "images/concert-audience.jpg" %}" width="100%">
+    <section style="padding-top: 50px">
+		<div class="container">
+			<div class="row" style="margin-top: 150px">
+                <div class="col-sm-9">
+					    <div class="special">
+        <div class="container">
+            <ul class="grid_2">
+                <li class="pull-right">
+                    <div>
+                        <a href="details.html" class="portfolio-link"><img src="{% static "images/20off.png" %}" class="off">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <p>
+                                        <i class="fa fa-calendar"></i>
+                                        شنبه
+                                        <br>
+                                        <i class="fa fa-clock-o"></i>
+                                        ۱۶:۰۰ - ۱۸:۰۰
+                                    </p>
+                                </div>
+                            </div>
+                            <img src="{% static "images/concert.jpg" %}"
+                                                                                            class="img-responsive"
+                                                                                            alt=""></a>
+                    </div>
+                    <div class="special-info grid_1 simpleCart_shelfItem">
+                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
+                            کنسرت بزرگ استاد شجریان
+                        </h5>
+
+                        <div>
+                            <div class="price">
+                                <div class="item_add"><span class="item_price"><h6 class="meta">
+                                    از
+                                    ۵۰۰۰۰
+                                    تومان
+                                </h6></span></div>
+                            </div>
+                            <div class="location pull-left">
+                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
+                                   data-content="
+                                   سینمای آزادی
+                                   |
+                                    خیابان فلان، پلاک فلان و ...
+                                   ">
+                                    <i class="fa fa-2x fa-map-marker"></i>
+                                </a>
+                                <a href="checkout.html" style="padding-left: 5px">
+                                    <i class="fa fa-2x fa-cart-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                <div class="clearfix" style="padding-bottom: 10px"></div>
+            </ul>
+            <!--</div>
+        </div>-->
+        </div>
+
+    </div>
+				</div>
+
+				<div class="col-sm-3" style="margin-top: 65px">
+					<div class="left-sidebar">
+						<div class="panel-group category-products" id="accordian"  style="background-color: #1b242f"><!--category-productsr-->
+							<div class="panel panel-primary">
+
+										<ul>
+											<li><a href="classic">کلاسیک </a></li>
+											<li><a href="">پاپ </a></li>
+											<li><a href="">راک </a></li>
+										</ul>
+
+
+							</div>
+						</div><!--/category-productsr-->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

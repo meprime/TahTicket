@@ -1,0 +1,97 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+	<script src="{% static "js/jquery.etalage.min.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/default.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/etalage.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-rtl.css" %}"/>
+
+    <script>
+		jQuery(document).ready(function($){
+			$('#etalage').etalage({
+				thumb_image_width: 300,
+				thumb_image_height: 400,
+				source_image_width: 900,
+				source_image_height: 1200,
+				zoom_area_distance: 'none'
+			});
+		});
+	</script>
+
+
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+	<div class="women_main">
+		<!-- start content -->
+		<div class="row single">
+			<div class="col-md-9 det">
+				<div class="single_left">
+					<div class="grid images_3_of_2 pull-right">
+						<ul id="etalage">
+							<li>
+								<a href="optionallink.html">
+									<img class="etalage_thumb_image img-responsive" src="{% static "images/kos1.jpg" %}" />
+									<img class="etalage_source_image img-responsive" src="{% static "images/kos1.jpg" %}" title="" />
+								</a>
+							</li>
+							<li>
+								<img class="etalage_thumb_image img-responsive" src="{% static "images/kos2.jpg" %}"/>
+								<img class="etalage_source_image img-responsive" src="{% static "images/kos2.jpg" %}" title="" />
+							</li>
+							<li>
+								<img class="etalage_thumb_image img-responsive" src="{% static "images/kos3.jpg" %}" />
+								<img class="etalage_source_image img-responsive" src="{% static "images/kos3.jpg" %}" />
+							</li>
+							<li>
+								<img class="etalage_thumb_image img-responsive" src="{% static "images/kos4.jpg" %}"  />
+								<img class="etalage_source_image img-responsive" src="{% static "images/kos4.jpg" %}" />
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="desc1 span_3_of_2 pull-left">
+						<h3>بازی هیجان انگیز رئال و بارسا</h3>
+						<span class="brand">سطح قیمت: <a href="#">خیلی بالا </a></span>
+						<br>
+						<span class="code">نوع بازی: لالیگا</span>
+						<p>بازی در روز دوشنبه ساعت 20:00 به وقت محلی در ورزشگاه خانگی بارسا برگزار خواهد شد</p>
+						<div class="price">
+							<span class="text">قیمت:</span>
+							<span class="price-old">$99.99</span><span class="price-new">$110.00</span>
+							<span class="price-tax">مالیات: $10.00</span><br>
+						</div>
+						<div class="det_nav1">
+							<h4>محل نشستن :</h4>
+							<div class=" sky-form col col-4">
+								<ul>
+									<li><label class="checkbox"><input type="checkbox" name="checkbox"><i></i>شرقی</label></li>
+									<li><label class="checkbox"><input type="checkbox" name="checkbox"><i></i>غربی</label></li>
+									<li><label class="checkbox"><input type="checkbox" name="checkbox"><i></i>شمالی</label></li>
+									<li><label class="checkbox"><input type="checkbox" name="checkbox"><i></i>جنوبی</label></li>
+								</ul>
+							</div>
+						</div>
+						<div class="btn_form">
+							<a href="/checkout">خرید</a>
+						</div>
+						<a href="#"><span>ورود به سامانه جهت ذخیره در لیست علاقه مندی ها</span></a>
+
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="single-bottom1">
+					<h6>جزئیات</h6>
+					<p class="prod-desc">
+						بنیتز اعلام کرد: طبق توافقات بین باشگاه بارسا و ورزشگاه برنابئو، پس از برگزاری یک دوره ی تمرینی 6 ماهه در این ورزشگاه، این تیم بی صبرانه منتظر رویارویی با تیم رئال است.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- end content -->
+	</div>
+</div>
+
+{% endblock %}

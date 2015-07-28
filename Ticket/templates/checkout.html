@@ -1,0 +1,95 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+    <link href="{% static "css/prettyPhoto.css" %}" rel="stylesheet">
+    <link href="{% static "css/price-range.css" %}" rel="stylesheet">
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <link href="{% static "css/responsive.css" %}" rel="stylesheet">
+{% endblock %}
+{% block main_content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="check">
+                    <div class="col-md-3 cart-total">
+                        <a class="continue" href="/">افزودن به سبد</a>
+
+                        <div class="price-details">
+                            <span class="total1" style="color: white!important;">499999</span>
+                            <h3 style="color: white!important;">بازی رئال - بارسا</h3>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="total_price">
+                            <li class="last_price"><span style="color: #357ebd!important;">499999</span></li>
+                            <li class="last_price"><h4>مجموع</h4></li>
+
+                            <div class="clearfix"></div>
+                        </ul>
+
+
+                        <div class="clearfix"></div>
+                        <a class="order" href="/fake_bank">پرداخت</a>
+
+                    </div>
+                    <div class="col-md-9 cart-items">
+                        <h1>سبد خرید من (1 مورد)</h1>
+                        <script>$(document).ready(function (c) {
+                            $('.close1').on('click', function (c) {
+                                $('.cart-header').fadeOut('slow', function (c) {
+                                    $('.cart-header').remove();
+                                });
+                            });
+                        });
+                        </script>
+                        <div class="cart-header">
+                            <div class="close1"></div>
+                            <div class="cart-sec simpleCart_shelfItem">
+
+                                <div class="cart-item-info" style="padding: 15px">
+                                    <h1><a href="/details">بازی رئال - بارسا</a></h1>
+                                    <h3>ورزشی</h3>
+
+                                    <div class="">
+                                        <p>قیمت : 499999﷼</p>
+                                        <p>تعداد : 1</p>
+                                        <p>مکان : شرقی</p>
+                                        <span></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="cart-item cyc">
+                                    <img src="{% static 'images/k1.jpg' %}" class="img-responsive" alt=""/>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                        <script>$(document).ready(function (c) {
+                            $('.close2').on('click', function (c) {
+                                $('.cart-header2').fadeOut('slow', function (c) {
+                                    $('.cart-header2').remove();
+                                });
+                            });
+                        });
+                        </script>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block end_extra %}
+    <script src="{% static "js/price-range.js" %}"></script>
+    <script src="{% static "js/jquery.scrollUp.min.js" %}"></script>
+    <script src="{% static "js/jquery.prettyPhoto.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+{% endblock %}

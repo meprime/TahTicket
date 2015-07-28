@@ -1,0 +1,49 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+    <link href="{% static "form_style.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block main_content %}
+    <div class="arriv">
+    <div class="container">
+        <div class="container col-md-6" style="margin-top: 200px">
+            <a class="btn btn-default" href="/my-tickets" role="button">
+                بلیت‌های خریداری‌شده
+            </a>
+            <a class="btn btn-default" href="#" role="button">
+    رویدادهای برگزارشده
+            </a>
+        </div>
+        <div class="container col-md-6">
+            <dl>
+                <dt>
+        نام کاربری:
+                </dt>
+                <dd>
+                    good_user
+                </dd>
+                <dt>
+                    ایمیل:
+                </dt>
+                <dd>
+                    user@good.com
+                </dd>
+            </dl>
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ user_update_form.as_table }}
+                    <div>
+                    <button type="submit" class="btn btn-primary">
+    ثبت تغییرات
+                    </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

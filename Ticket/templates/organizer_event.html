@@ -1,0 +1,123 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+    <link href="{% static "form_style.css" %}" rel="stylesheet">
+    <link type="text/css" href="{% static "css/jquery-ui-1.8.14.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "js/jquery-1.6.2.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.ui.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.ui.datepicker-cc.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/calendar.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.ui.datepicker-cc-fa.js" %}"></script>
+
+    <script type="text/javascript">
+    $(function(){
+        $('.datepicker').datepicker();
+    });
+    </script>
+{% endblock %}
+
+{% block main_content %}
+    <div class="arriv">
+    <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    <div class="container col-md-6">
+        <h2>
+            وضعیت بلیت‌ها
+        </h2>
+        <div class="">
+            <table class="table">
+                <thead>
+                <th class="text-right">
+                    نوع بلیت
+                </th>
+                <th class="text-right">
+                    ظرفیت
+                </th>
+                <th class="text-right">
+                    تعداد فروخته‌شده
+                </th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        درجه‌ی یک
+                    </td>
+                    <td>
+                        ۱۰۰۰
+                    </td>
+                    <td>
+                        ۵۰۰
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        درجه‌ی دو
+                    </td>
+                    <td>
+                        ۲۰۰۰
+                    </td>
+                    <td>
+                        ۷۰۰
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="">
+            <h3>
+                افزودن بلیت جدید
+            </h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ ticket_form.as_table }}
+                <div>
+                <button type="submit" class="btn btn-primary">
+                    اضافه کن
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container col-md-6">
+        <div class="">
+            <img src="{% static "images/pepe.jpg" %}" class="img-rounded" height="250px">
+        </div>
+        <div class="">
+            <dl class="">
+                <dt>
+عنوان
+                </dt>
+                <dd>
+                    ال‌کلاسیکو
+                </dd>
+                <dt>
+                    دسته
+                </dt>
+                <dd>
+                    ورزشی
+                </dd>
+                <dt>
+                    زیردسته
+                </dt>
+                <dd>
+                    فوتبال
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ update_event_form.as_table }}
+                <div>
+                <button type="submit" class="btn btn-primary">
+ثبت تغییرات
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    </div>
+    </div>
+{% endblock %}

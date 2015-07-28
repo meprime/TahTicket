@@ -1,0 +1,158 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/etalage.css' %}">
+<script src="{% static 'js/bootstrap-rating-input.min.js' %}" type="text/javascript"></script>
+
+<script src="{% static 'js/jquery.etalage.min.js' %}"></script>
+<script>
+    jQuery(document).ready(function ($) {
+
+        $('#etalage').etalage({
+            zoom_area_distance: 'none',
+            thumb_image_width: 300,
+            thumb_image_height: 400,
+            source_image_width: 900,
+            source_image_height: 1200
+        });
+
+    });
+</script>
+{% endblock %}
+{% block main_content %}
+
+<!-- content -->
+<section>
+    <div class="container">
+        <div class="row" style="margin-top: 60px">
+            <div class="women_main">
+                <!-- start content -->
+                <div class="row single">
+                    <div class="col-md-9 col-md-offset-3 det">
+                        <div class="single_left">
+                            <div class="grid images_3_of_2 pull-right">
+                                <ul id="etalage">
+                                    <li>
+                                        <a href="optionallink.html">
+                                            <img class="etalage_thumb_image img-responsive"
+                                                 src="{% static 'images/k1.jpg' %}"/>
+                                            <img class="etalage_source_image img-responsive"
+                                                 src="{% static 'images/k1.jpg' %}"
+                                                 title=""/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <img class="etalage_thumb_image img-responsive"
+                                             src="{% static 'images/k2.jpg' %}"/>
+                                        <img class="etalage_source_image img-responsive"
+                                             src="{% static 'images/k2.jpg' %}"
+                                             title=""/>
+                                    </li>
+                                    <li>
+                                        <img class="etalage_thumb_image img-responsive"
+                                             src="{% static 'images/k3.jpg' %}"/>
+                                        <img class="etalage_source_image img-responsive"
+                                             src="{% static 'images/k3.jpg' %}"/>
+                                    </li>
+                                    <li>
+                                        <img class="etalage_thumb_image img-responsive"
+                                             src="{% static 'images/k4.jpg' %}"/>
+                                        <img class="etalage_source_image img-responsive"
+                                             src="{% static 'images/k4.jpg' %}"/>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="desc1 span_3_of_2 pull-left">
+                                {% block rating %}
+                                {% endblock %}
+
+                                <h3 style="color: skyblue!important;">بازی هیجان انگیز رئال و بارسا</h3>
+                                <span class="code">نوع بازی: لالیگا</span>
+
+                                <p style="color: #f5f5f5!important;">بازی در روز دوشنبه ساعت 20:00 به وقت محلی در
+                                    ورزشگاه خانگی بارسا برگزار خواهد
+                                    شد</p>
+
+                                <div class="price">
+                                    <span class="text">قیمت:</span>
+                                    <span class="price-old">499999﷼</span><span class="price-new">449999﷼</span>
+                                    <br>
+                                    <span class="text">تعداد:</span>
+                                    <input class="input-small" type="number" value="1" style="color: #000000">
+                                    <br>
+                                </div>
+                                <div class="det_nav1">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <span class="text">محل نشستن :</span>
+
+                                    <div class=" sky-form col col-4" style="margin-top: 0;">
+                                        <ul>
+                                            <li><label class="checkbox"><input type="checkbox"
+                                                                               name="checkbox"><i></i>شرقی</label>
+                                            </li>
+                                            <li><label class="checkbox"><input type="checkbox"
+                                                                               name="checkbox"><i></i>غربی</label>
+                                            </li>
+                                            <li><label class="checkbox"><input type="checkbox"
+                                                                               name="checkbox"><i></i>شمالی</label>
+                                            </li>
+                                            <li><label class="checkbox"><input type="checkbox"
+                                                                               name="checkbox"><i></i>جنوبی</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="btn_form">
+                                    <a href="/checkout">خرید</a>
+                                        <span class="fa fa-star-o" data-rating="1" id="favorite-star"
+                                              title="افزودن به علاقه مندی ها"></span>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="single-bottom1">
+                            <h6>جزئیات</h6>
+
+                            <p class="prod-desc" style="color: #f5f5f5!important;">
+                                بنیتز اعلام کرد: طبق توافقات بین باشگاه بارسا و ورزشگاه برنابئو، پس از برگزاری یک
+                                دوره ی
+                                تمرینی 6 ماهه در این ورزشگاه، این تیم بی صبرانه منتظر رویارویی با تیم رئال است.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end content -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block end_extra %}
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/price-range.js"></script>
+<script src="../static/js/jquery.scrollUp.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jquery.prettyPhoto.js"></script>
+<script src="../static/js/main.js"></script>
+<script>
+    $('#favorite-star').on('click', function () {
+        if ($(this).hasClass('fa-star-o')) {
+            $(this).removeClass('fa-star-o');
+            $(this).addClass('fa-star filled-star');
+            $(this).attr('title', 'حذف از لیست علاقه مندی ها');
+            alert('با موفقیت به لیست علاقه مندی ها اضافه شد');
+        } else {
+            $(this).removeClass('fa-star filled-star');
+            $(this).addClass('fa-star-o');
+            $(this).attr('title', 'افزودن به لیست علاقه مندی ها');
+            alert('با موفقیت از لیست علاقه مندی ها حذف گردید.')
+        }
+    });
+</script>
+
+{% endblock %}

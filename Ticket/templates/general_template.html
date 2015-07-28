@@ -1,0 +1,296 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+
+{% load static %}
+
+<script type='text/javascript' src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+
+<title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Contact :: w3layouts</title>
+<link href="{% static "css/bootstrap.css" %}" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="{% static "fonts/font-awesome-4.3.0/css/font-awesome.min.css" %}"/>
+<link href="{% static "css/style.css" %}" rel='stylesheet' type='text/css' />
+<link href="{% static "css/two_level_menu.css" %}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+<!-- start menu -->
+<link href="{% static "css/megamenu.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static "engine0/style.css" %}"/>
+<script type="text/javascript" src="{% static "js/megamenu.js" %}"></script>
+<script src="{% static "js/menu_jquery.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+<style>
+    @font-face {
+        font-family: myFontFamily;
+        src: url(../static/fonts/Yekan.ttf);
+    }
+    body, h1, h2, h3, h4, h5, h6, li, a {
+        font-family: myFontFamily !important;
+    }
+    .clickable-row {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.document.location = $(this).data("href");
+        });
+    });
+</script>
+
+    {% block header_extension %} <!-- HEADER EXTENSION --> {% endblock %}
+
+</head>
+<body dir="rtl">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" id="nav-container">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#page-top" style="padding-top: 0;">
+                <img src="{% static "images/logo-small.png"%}">
+
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                {% block login_btn %}
+                <li>
+                    <a id="login_text" class="btn btn-ticket" style="color: #ffffff;padding: 5px;" data-toggle="modal"
+                       data-target="#login-modal">
+                        <i class="fa fa-lock"></i>
+                        ورود
+                    </a>
+                </li>
+                {% endblock %}
+                <li>
+                    <a href="/checkout" class="btn btn-ticket" style="color: #ffffff;padding: 5px;">
+                        <i class="fa fa-shopping-cart"></i>
+                        سبد خرید<span class="order-count">1</span>
+                    </a>
+                </li>
+
+            </ul>
+            <div class="col-sm-3 col-md-3 col-md-offset-3" dir="ltr">
+                <form class="navbar-form" role="search" action="/search">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="جست‌وجو" name="srch-term" id="srch-term"
+                               dir="rtl">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div class="header_bg">
+    <div class="container">
+        <br/><br/>
+        &nbsp &nbsp &nbsp
+        <ul class="top-level-menu my-menu skyblue">
+            <li>
+                <a class="color1" href="/">خانه</a>
+            </li>
+            <li>
+                <a class="color2" href="#">ورزشی</a>
+                <ul class="second-level-menu">
+                    <li><a href="#">فوتبال</a></li>
+                    <li><a href="#">والیبال</a></li>
+                    <li><a href="#">کشتی</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="color3" href="#">کنسرت</a>
+                <ul class="second-level-menu">
+                    <li><a href="#">کلاسیک</a></li>
+                    <li><a href="#">پاپ</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="color4" href="#">سینما</a>
+                <ul class="second-level-menu">
+                    <li><a href="#">درام</a></li>
+                    <li><a href="#">کمدی</a></li>
+                    <li><a href="#">تراژدی</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="color5" href="#">تئاتر</a>
+                <ul class="second-level-menu">
+                    <li><a href="#">درام</a></li>
+                    <li><a href="#">کمدی</a></li>
+                    <li><a href="#">تراژدی</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+{% block main_content %} <!-- MAIN CONTENT --> {% endblock %}
+
+
+<div class="foot-top" dir="ltr">
+    <div class="container">
+        <div class="s-c" style="text-align: center;">
+            <li>
+                <div class="social-ic">
+                    <ul>
+                        <li><a href="#"><i class="facebok"> </i></a></li>
+                        <li><a href="#"><i class="twiter"> </i></a></li>
+                        <li><a href="#"><i class="goog"> </i></a></li>
+                        <li><a href="#"><i class="be"> </i></a></li>
+                        <div class="clearfix"></div>
+                    </ul>
+                </div>
+            </li>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+<!-- Modal -->
+<div id="login-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="nav nav-pills pull-right">
+                    <li><a data-toggle="tab" href="#register">ثبت‌نام</a></li>
+                    <li class="active"><a data-toggle="tab" href="#login">ورود</a></li>
+                </ul>
+                <div class="clearfix"></div>
+                <div class="tab-content">
+                    <div id="login" class="tab-pane fade in active">
+                        <h3>
+                            ورود به سایت
+                        </h3>
+
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="email">
+                                    آدرس پست الکترونیکی
+                                </label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">
+                                    رمز عبور
+                                </label>
+                                <input type="password" class="form-control" id="pwd">
+                            </div>
+                            <div class="form-group">
+                                <label><input type="checkbox">
+                                    مرا به خاطر بسپار
+                                </label>
+                            </div>
+                            <div>
+                                <a href="/forgot-password">
+                                    رمز عبور خود را فراموش کرده‌اید؟
+                                </a>
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                ورود
+                            </button>
+                        </form>
+                    </div>
+                    <div id="register" class="tab-pane fade in">
+                        <h3>
+                            ثبت‌نام در سایت
+                        </h3>
+
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label for="username">
+                                    نام
+                                </label>
+                                <input type="email" class="form-control" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">
+                                    آدرس پست الکترونیکی
+                                </label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_no">
+شماره‌ی تماس
+                                </label>
+                                <input type="text" class="form-control" id="phone_no">
+                            </div>
+                            <div class="form-group">
+                                <div class="radio">
+                                  <label>
+                                    <input type="radio" name="gender" id="gender" value="M" checked>
+                                    مرد
+                                  </label>
+                                </div>
+                                <div class="radio">
+                                  <label>
+                                    <input type="radio" name="gender" id="gender" value="F">
+                                    زن
+                                  </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">
+                                    رمز عبور
+                                </label>
+                                <input type="password" class="form-control" id="pwd">
+                                <label for="pwd">
+                                    تکرار رمز عبور
+                                </label>
+                                <input type="password" class="form-control" id="pwd">
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                ثبت‌نام
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% block end_extra %}  {% endblock %}
+</body>

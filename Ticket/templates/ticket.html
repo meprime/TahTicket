@@ -1,0 +1,82 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .header {
+            background: -webkit-linear-gradient(right, #001030, blue); /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(right,#001030, blue); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(right,#001030, blue); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(right,#001030, blue); /* Standard syntax */
+        }
+
+        .ticket-container{
+            padding-top: 50px;
+        }
+
+        .stub{
+            border-left: dashed 3px;
+            background-color: darkgray;
+        }
+
+        .ticket-body{
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container ticket-container">
+        <div class="col-md-12 row" style="border:1px solid #000000;">
+            <div class="row header">
+                <img src="{% static "images/logo-small.png" %}">
+        </div>
+            <div class="row">
+                <div class="col-md-2 bar-code">
+                    <img src="{% static "images/qr.png" %}" width="100%">
+                </div>
+                <div class="col-md-7 ticket-body">
+                        <h3>
+                        نمایش یک شب تنهایی
+                        </h3>
+                        <h4>
+                            مکان: تئاتر شهر
+                        </h4>
+                        <p>
+                            آدرس: تقاطع خیابان ولیعصر و خیابان انقلاب
+                        </p>
+                        <p>
+                            زمان:
+                            ۹۴/۰۸/۰۴،
+                            ساعت ۶ الی ۹
+                            </p>
+                        <p>
+                            شماره صندلی: ۵ب
+                        </p>
+                    </div>
+                <div class="col-md-3 stub">
+                    <p>
+    شماره بلیط: 12123092asf2
+                    </p>
+                    <p>
+                        رویداد: نمایش یک شب تنهایی
+                    </p>
+                    <p>
+                        تاریخ:
+                        <em>۹۴/۰۸/۰۴</em>
+                    </p>
+                    <p>
+                        زمان:
+                        <em>۹-۶</em>
+                    </p>
+                    <p>
+    شماره صندلی: ۵ب
+                    </p>
+                    </div>
+            <div class="clearfix visible-md"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
