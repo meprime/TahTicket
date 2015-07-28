@@ -3,10 +3,6 @@ from django.shortcuts import render
 from Ticket.forms import *
 
 
-def single_event(request):
-    return render(request, 'details.html')
-
-
 def organizer_event(request):
     ticket_form = NewTicketTypeForm
     update_event_form = UpdateEventForm(  # needs to be taken care of

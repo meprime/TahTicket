@@ -2,7 +2,7 @@
 from django import forms
 from Ticket.models import ContactMessage
 from django.contrib.auth.models import User
-from User.models import Customer
+from User.models import UserProfile
 from Event.models import Event, Venue, Ticket
 from django.utils.translation import ugettext_lazy as _
 
@@ -75,7 +75,7 @@ class UserRegistrationForm(forms.ModelForm):
 
 class CustomerRegistrationForm(forms.ModelForm):
     class Meta:
-        model = Customer
+        model = UserProfile
         fields = ['phone_no', 'gender']
         labels = {
             'phone_no': _('شماره‌ی تماس'),

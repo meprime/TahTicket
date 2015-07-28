@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
 
-from User.models import EventOrganizer, Customer
+from User.models import UserProfile
 
 
 class Venue(models.Model):
@@ -38,7 +38,7 @@ class Event(models.Model):
     venue = models.ForeignKey(Venue)
     type = models.ForeignKey(Type)
     sub_type = models.ForeignKey(SubType)
-    organizer = models.ForeignKey(EventOrganizer)
+    # organizer = models.ForeignKey(EventOrganizer)  ### APPARENTLY NOT REQUIRED
 
     '''
     def clean(self):
@@ -61,7 +61,7 @@ class Ticket(models.Model):
 
 class BoughtTicket(models.Model):
     ticket = models.ForeignKey(Ticket)
-    buyer = models.ForeignKey(Customer)
+    buyer = models.ForeignKey(UserProfile)
     serial_no = models.BigIntegerField(null=True, blank=True)
 
 

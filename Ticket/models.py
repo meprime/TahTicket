@@ -1,16 +1,16 @@
 from django.db import models
 from Event.models import Event
-from User.models import Customer, EventOrganizer
+from User.models import UserProfile
 
 
 class Comment(models.Model):
-    commenter = models.ForeignKey(Customer)
+    commenter = models.ForeignKey(UserProfile)
     event = models.ForeignKey(Event)
     text = models.TextField()
 
 
 class CommentResponse(models.Model):
-    responder = models.ForeignKey(EventOrganizer)
+    responder = models.ForeignKey(UserProfile)
     text = models.TextField()
 
 
