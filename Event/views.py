@@ -1,17 +1,48 @@
 # coding=utf-8
 from django.shortcuts import render
 from Ticket.forms import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 
-def organizer_event(request):
+def admin_event(request, event_id):
+    try:
+        event = Event.objects.get(id=event_id)
+    except:
+        return Http404('رویداد مورد نظرتان وجود ندارد.')
+
+    if request.method == 'POST':
+        if 'update-event' in request.POST:
+            event_form = UpdateEventForm(request.POST or None, instance=event)
+            if event_form.is_valid():
+                event_form.save()
+        if 'add-ticket' in request.POST:
+            ticket_form = NewTicketTypeForm(request.POST)
+            if ticket_form.is_valid():
+                new_ticket = ticket_form.save(commit=False)
+                new_ticket.event = event
+                new_ticket.save()
+
     ticket_form = NewTicketTypeForm
     update_event_form = UpdateEventForm(  # needs to be taken care of
         initial={
-            'description': 'یک مسابقه‌ی هیجان‌انگیز',
+            'description': event.description,
+            'date': event.date,
+            'time': event.time,
+            'venue': event.venue,
             }
     )
+    ticket_types = Ticket.objects.filter(event=event)
+    tickets = []
+    for tt in ticket_types:
+        tickets.append({
+            'type': tt.type,
+            'capacity': tt.capacity,
+            'sold': tt.sold,
+        })
+
     return render(request, 'organizer_event.html', {
+        'event': event,
+        'tickets': tickets,
         'ticket_form': ticket_form,
         'update_event_form': update_event_form,
     })
@@ -39,6 +70,14 @@ def new_event(request):
         'success_message': success_msg,
         'error_message': error_msg,
     })
+
+
+def remove_event(request, event_id):
+    try:
+        Event.objects.get(id=event_id).delete()
+    except:
+        pass
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def show_ticket(request):

@@ -39,7 +39,8 @@ class UpdateEventForm(forms.ModelForm):  # used for organizer to update some pro
             'venue': _('مکان'),
         }
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'datepicker'})
+            'date': forms.DateInput(attrs={'class': 'datepicker'}),
+            'description': Textarea(attrs={'cols': 40, 'rows': 2}),
         }
 
 

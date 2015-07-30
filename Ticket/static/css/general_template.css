@@ -1,0 +1,13 @@
+@font-face {
+    font-family: myFontFamily;
+    src: url(../../static/fonts/Yekan.ttf);
+}
+body, h1, h2, h3, h4, h5, h6, li, a {
+    font-family: myFontFamily !important;
+}
+.clickable-td a span {
+    color: #45BF55;
+}
+.clickable-row {
+    /*cursor: pointer;*/
+}

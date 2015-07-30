@@ -38,28 +38,19 @@
                 </th>
                 </thead>
                 <tbody>
-                <tr>
+                {% for t in tickets %}
+                    <tr>
                     <td>
-                        درجه‌ی یک
+                        {{ t.type }}
                     </td>
                     <td>
-                        ۱۰۰۰
+                        {{ t.capacity }}
                     </td>
                     <td>
-                        ۵۰۰
+                        {{ t.sold }}
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        درجه‌ی دو
-                    </td>
-                    <td>
-                        ۲۰۰۰
-                    </td>
-                    <td>
-                        ۷۰۰
-                    </td>
-                </tr>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -71,7 +62,7 @@
                 {% csrf_token %}
                 {{ ticket_form.as_table }}
                 <div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" name="add-ticket">
                     اضافه کن
                 </button>
                 </div>
@@ -89,19 +80,19 @@
 عنوان
                 </dt>
                 <dd>
-                    ال‌کلاسیکو
+                    {{ event.title }}
                 </dd>
                 <dt>
                     دسته
                 </dt>
                 <dd>
-                    ورزشی
+                    {{ event.type }}
                 </dd>
                 <dt>
                     زیردسته
                 </dt>
                 <dd>
-                    فوتبال
+                    {{ event.sub_type }}
                 </dd>
             </dl>
         </div>
@@ -110,7 +101,7 @@
                 {% csrf_token %}
                 {{ update_event_form.as_table }}
                 <div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" name="update-event">
 ثبت تغییرات
                 </button>
                 </div>

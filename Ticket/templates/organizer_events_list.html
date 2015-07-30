@@ -14,24 +14,30 @@
     <div class="arriv">
     <div class="container">
         <h2 style="padding-top: 50px; padding-bottom: 70px;">
-            بلیت‌های خریداری‌شده‌ی قبلی شما:
+همه‌ی رویدادهای ثبت‌شده:
         </h2>
-        <table class="table table-hover">
+        <table class="table">
             <thead>
             <th>رویداد</th>
             <th>تاریخ رویداد</th>
             <th>دسته</th>
+            <th>زیر دسته</th>
+            <th>تعداد بلیت‌های فروخته‌شده</th>
+            <th>مجموع قیمت</th>
+            <th>حذف رویداد</th>
             </thead>
             <tbody>
-            <tr class="clickable-row" data-href="/organizer-event">
-                <td>فوتبال</td> <td>۱۱/۱۱/۲۰۱۵</td> <td>ورزشی</td>
-            </tr>
-            <tr class="clickable-row" data-href="/organizer-event">
-                <td>فیلم خش</td> <td>۱۱/۱۱/۲۰۱۵</td> <td>فیلم</td>
-            </tr>
-            <tr class="clickable-row" data-href="/organizer-event">
-                <td>کنسرت ناخش</td> <td>۱۱/۱۱/۲۰۱۵</td> <td>کنسرت</td>
-            </tr>
+            {% for event in events %}
+                <tr class="clickable-row" data-href="/admin-event/{{ event.id }}">
+                    <td class="clickable-td"><a href="/admin-event/{{ event.id }}"><span>{{ event.title }}</span></a></td>
+                    <td>{{ event.date }}</td>
+                    <td>{{ event.type }}</td>
+                    <td>{{ event.sub_type }}</td>
+                    <td>{{ event.sold_tickets }}</td>
+                    <td>{{ event.tickets_price }}</td>
+                    <td><a href="/remove-event/{{ event.id }}"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: #ff0000"></span></a></td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from Event.models import *
 from Ticket.forms import ForgotPasswordForm
 
 def index(request):
@@ -13,8 +14,29 @@ def user_tickets(request):
     return render(request, 'user_tickets.html')
 
 
-def organizer_all_events(request):
-    return render(request, 'organizer_events_list.html')
+def admin_all_events(request):
+    all_events = Event.objects.all()
+    events = []
+    for event in all_events:
+        tickets = Ticket.objects.filter(event=event)
+        sold_tickets = BoughtTicket.objects.filter(ticket__in=tickets)
+        tickets_price = 0
+        for t in sold_tickets:
+            tickets_price += t.ticket.price
+        e = {
+            'title': event.title,
+            'date': event.date,
+            'type': event.type,
+            'sub_type': event.sub_type,
+            'id': event.id,
+            'sold_tickets': sold_tickets.count(),
+            'tickets_price': tickets_price,
+        }
+        events.append(e)
+
+    return render(request, 'organizer_events_list.html', {
+        'events': events,
+    })
 
 
 def search(request):
