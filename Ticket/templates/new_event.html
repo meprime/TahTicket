@@ -20,6 +20,8 @@
 {% block main_content %}
 <div class="arriv">
 <div class="container">
+    <div style="text-align: center; color: green">{{ success_message }}</div>
+    <div style="text-align: center; color: red">{{ error_message }}</div>
     <div class="main">
         <div class="col-md-6">
         <h3>
@@ -29,7 +31,7 @@
             {% csrf_token %}
             {{ venue_form.as_table }}
             <div>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" name="new-venue">
                 مکان را اضافه کن
             </button>
             </div>
@@ -40,7 +42,7 @@
             {% csrf_token %}
             {{ event_form.as_table }}
             <div>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" name="new-event">
                 رویداد را اضافه کن
             </button>
             </div>

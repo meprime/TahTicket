@@ -1,5 +1,6 @@
 # coding=utf-8
 from django import forms
+from django.forms import Textarea
 from Ticket.models import ContactMessage
 from django.contrib.auth.models import User
 from User.models import UserProfile
@@ -11,6 +12,7 @@ class NewEventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ['organizer']
+
         labels = {
             'title': _('عنوان'),
             'description': _('توضیحات'),
@@ -21,7 +23,8 @@ class NewEventForm(forms.ModelForm):
             'sub_type': _('زیردسته'),
         }
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'datepicker'})
+            'date': forms.DateInput(attrs={'class': 'datepicker'}),
+            'description': Textarea(attrs={'cols': 40, 'rows': 2}),
         }
 
 
