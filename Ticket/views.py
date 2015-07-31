@@ -1,9 +1,28 @@
 from django.shortcuts import render
+
 from Event.models import *
 from Ticket.forms import ForgotPasswordForm
 
+
 def index(request):
-    return render(request, 'index.html')
+    types = Type.objects.all()
+    images = []
+    for i in range(1, types.__sizeof__()):
+        images += "images/type/" + i.__str__() + ".jpg"
+    events = Event.objects.all()
+    new_events = []
+    for i in range(0, 4):
+        if events.__len__() >= i:
+            new_events.append(events[i])
+
+    subtypes = SubType.objects.all()
+    return render(request, 'index.html',
+                  {
+                      "types": types,
+                      "images": images,
+                      "subtypes": subtypes,
+                      "new_events": new_events,
+                  })
 
 
 def contact_us(request):
@@ -61,3 +80,6 @@ def forgot_password(request):
         'form': form,
     })
 
+
+def type(request, type_id):
+    render(request, 'contact.html')

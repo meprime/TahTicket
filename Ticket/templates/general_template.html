@@ -110,37 +110,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li>
                 <a class="color1" href="/">خانه</a>
             </li>
+            {% for type in types %}
             <li>
-                <a class="color2" href="#">ورزشی</a>
+                <a class="color3" href="/type/{{ type.id }}">{{ type.name }}</a>
                 <ul class="second-level-menu">
-                    <li><a href="#">فوتبال</a></li>
-                    <li><a href="#">والیبال</a></li>
-                    <li><a href="#">کشتی</a></li>
+                    {% for subtype in subtypes %}
+                        {% if subtype.type.name == type.name %}
+                            <li><a href="/type/{{ type.id }}/{{ subtype.id }}">{{ subtype.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </li>
-            <li>
-                <a class="color3" href="#">کنسرت</a>
-                <ul class="second-level-menu">
-                    <li><a href="#">کلاسیک</a></li>
-                    <li><a href="#">پاپ</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="color4" href="#">سینما</a>
-                <ul class="second-level-menu">
-                    <li><a href="#">درام</a></li>
-                    <li><a href="#">کمدی</a></li>
-                    <li><a href="#">تراژدی</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="color5" href="#">تئاتر</a>
-                <ul class="second-level-menu">
-                    <li><a href="#">درام</a></li>
-                    <li><a href="#">کمدی</a></li>
-                    <li><a href="#">تراژدی</a></li>
-                </ul>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </div>

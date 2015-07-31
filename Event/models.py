@@ -16,9 +16,10 @@ class Venue(models.Model):
 
 class Type(models.Model):
     name = models.CharField(max_length=20)
+    description = models.CharField(max_length=200, default="")
 
     def __str__(self):
-        return self.name
+        return self.name + " - " + self.description
 
 
 class SubType(models.Model):

@@ -13,12 +13,12 @@
                 <div id="wowslider-container0" class="col-md-9">
                     <div class="ws_images" dir="ltr">
                         <ul>
-                            <li><a href="/event"><img src="{% static "data0/images/sport1.jpg" %}"
+                            <li><a href="/event"><img src="{% static "data0/images/1.jpg" %}"
                                                             title="کنسرت بزرگ استاد شجریان"
                                                             id="wows0_0"/></a></li>
-                            <li><a href="/event"><img src="{% static "data0/images/sport2.jpg" %}" title="نمایش گزارش به آکادمی"
+                            <li><a href="/event"><img src="{% static "data0/images/2.jpg" %}" title="نمایش گزارش به آکادمی"
                                                             id="wows0_1"/></a></li>
-                            <li><a href="/event"><img src="{% static "data0/images/sport3.jpg" %}"
+                            <li><a href="/event"><img src="{% static "data0/images/3.jpg" %}"
                                                             title="فیلم جدایی نادر از سیمین"
                                                             id="wows0_2"/></a></li>
                         </ul>
@@ -26,11 +26,11 @@
                     <div class="ws_bullets">
                         <div>
                             <a href="#" title="کنسرت بزرگ استاد شجریان"><span><img
-                                    src="{% static "data0/tooltips/sport1.jpg" %}"/>1</span></a>
+                                    src="{% static "data0/tooltips/1.jpg" %}"/>1</span></a>
                             <a href="#" title="نمایش گزارش به آکادمی"><span><img
-                                    src="{% static "data0/tooltips/sport2.jpg" %}"/>2</span></a>
+                                    src="{% static "data0/tooltips/2.jpg" %}"/>2</span></a>
                             <a href="#" title="فیلم جدایی نادر از سیمین"><span><img
-                                    src="{% static "data0/tooltips/sport3.jpg" %}"/>3</span></a>
+                                    src="{% static "data0/tooltips/3.jpg" %}"/>3</span></a>
                         </div>
                     </div>
                     <div class="ws_shadow"></div>
@@ -57,86 +57,48 @@
                 </p>
             </div>
             <div class="panel-body">-->
-        <div class="arriv-top">
-            <a href="/search" class="portfolio-link">
+        {% for type in types %}
+            {% if forloop.counter|divisibleby:2 %}
+                <a href="/type/{{ type.id }}" class="portfolio-link">
+                <div class="col-md-6 cat-right">
+                    <div class=" arriv-right">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h3>{{ type.name }}</h3>
+                                <p>{{ type.description }}</p>
+                            </div>
+                        </div>
+
+                        {% with type.id|stringformat:"s" as id %}
+                            <img src="{% static 'images/type/'|add:id|add:'.jpg' %}" class="img-responsive" alt="">
+                        {% endwith %}
+                    </div>
+                </div>
+            </a>
+                    <div class="clearfix"></div>
+                </div>
+            {% else %}
+                <div class="arriv-top">
+                <a href="/type/{{ type.id }}" class="portfolio-link">
                 <div class="col-md-6 cat-left">
                     <div class=" arriv-left">
                         <div class="caption">
                             <div class="caption-content">
                                 <h3>
-                                    <i class="fa fa-dribbble"></i>
-                                    ورزشی
+                                    {{ type.name }}
                                 </h3>
 
-                                <p>از تیم خود طرفداری کنید...</p>
+                                <p>{{ type.description }}</p>
                             </div>
                         </div>
-                        <img src="{% static "images/sport2.jpg" %}" class="img-responsive" alt="">
+                        {% with type.id|stringformat:"s" as id %}
+                            <img src="{% static 'images/type/'|add:id|add:'.jpg' %}" class="img-responsive" alt="">
+                        {% endwith %}
                     </div>
                 </div>
             </a>
-            <a href="/concert" class="portfolio-link">
-                <div class="col-md-6 cat-right">
-                    <div class=" arriv-right">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <h3>
-                                    <i class="fa fa-music"></i>
-                                    کنسرت
-                                </h3>
-
-                                <p>رنگ موسیقی را به زندگیتان بیاورید...</p>
-                            </div>
-                        </div>
-                        <img src="{% static "images/concert2.jpg" %}" class="img-responsive" alt="">
-                    </div>
-                </div>
-            </a>
-
-            <div class="clearfix"></div>
-        </div>
-        <div class="arriv-bottm">
-            <a href="/search" class="portfolio-link">
-                <div class="col-md-8 cat-left">
-                    <div class="arriv-left1">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <h3>
-                                    <i class="fa fa-youtube-play"></i>
-                                    سینما
-                                </h3>
-
-                                <p>
-                                    نگاه به زندگی از دریچه‌ی دوربین...
-                                </p>
-                            </div>
-                        </div>
-                        <img src="{% static "images/film1.jpg" %}" class="img-responsive" alt="">
-                    </div>
-                </div>
-            </a>
-            <a href="/search" class="portfolio-link">
-                <div class="col-md-4 cat-right">
-                    <div class="arriv-right1">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <h3>
-                                    <i class="fa fa-eye"></i>
-                                    تئاتر
-                                </h3>
-
-                                <p>
-                                    لمس لحظه‌ها...
-                                </p>
-                            </div>
-                        </div>
-                        <img src="{% static "images/teather.jpg" %}" class="img-responsive" alt="">
-                    </div>
-                </div>
-            </a>
-
-            <div class="clearfix"></div>
-        </div>
+            {% endif %}
+        {% endfor %}
         <div>
             <a href="/search" class="portfolio-link">
                 <div class="col-md-12 cat-left cat-right">
@@ -172,46 +134,37 @@
     <div class="special">
         <div class="container">
             <ul class="grid_2">
-                <li>
+                {% for new_event in new_events %}
+                    <li>
                     <div>
-                        <a href="/event" class="portfolio-link">
+                        <a href="/event/{{ new_event.id }}" class="portfolio-link">
                             <div class="caption">
                                 <div class="caption-content">
                                     <p>
                                         <i class="fa fa-calendar"></i>
-                                        شنبه
+{{ new_event.date }}
                                         <br>
                                         <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
+                                        {{ new_event.time }}
                                     </p>
                                 </div>
                             </div>
-                            <img src="{% static "images/teather.jpg" %}" class="img-responsive" alt="">
+                            {% with new_event.id|stringformat:"s" as id %}
+                                <img src="{% static 'images/events/'|add:id|add:'.jpg' %}" class="img-responsive" alt="">
+                            {% endwith %}
                         </a>
                     </div>
                     <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            نمایش تنهایی
-                        </h5>
-
-                        <div>
                             <div class="price">
                                 <div class="item_add">
                                     <span class="item_price">
-                                        <h6 class="meta">
-                                            از
-                                            ۵۰۰۰ تومان
-                                        </h6>
+                                        <h6 class="meta">{{ new_event.title }}</h6>
                                     </span>
                                 </div>
                             </div>
                             <div class="location pull-left">
                                 <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   تئاتر شهر
-                                   |
-                                    خیابان انقلاب اسلامی، جنب پارک دانشجو
-                                   ">
+                                   data-content="{{ new_event.venue.address }}">
                                     <i class="fa fa-2x fa-map-marker"></i>
                                 </a>
                                 <a href="/checkout" style="padding-left: 5px">
@@ -219,148 +172,8 @@
                                 </a>
                             </div>
                         </div>
-
-                    </div>
                 </li>
-                <li>
-                    <div>
-                        <a href="/event" class="portfolio-link"><img src="{% static "images/20off.png" %}" class="off"><div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div><img src="{% static "images/pepe.jpg" %}"
-                                                                                            class="img-responsive"
-                                                                                            alt=""></a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            مسابقه‌ی دوستانه‌ی رئال مادرید و بارسلونا
-                        </h5>
-
-                        <div>
-                            <div class="price">
-                                <div class="item_add"><span class="item_price"><h6 class="meta">
-                                    از
-                                    ۱۵۰۰۰
-                                    تومان
-                                </h6></span></div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   ورزشگاه آزادی
-                                   |
-                                    خیابان فلان، پلاک فلان و ...
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <a href="/event" class="portfolio-link">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div>
-                            <img src="{% static "images/Santori.jpg" %}" class="img-responsive" alt=""></a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            فیلم سنتوری
-                        </h5>
-
-                        <div>
-                            <div class="price">
-                                <div class="item_add"><span class="item_price"><h6 class="meta">
-                                    ۴۰۰۰
-                                    تومان
-                                </h6></span></div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   سینمای آزادی
-                                   |
-                                    خیابان فلان، پلاک فلان و ...
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <a href="/event" class="portfolio-link"><img src="{% static "images/20off.png" %}" class="off">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div>
-                            <img src="{% static "images/concert.jpg" %}"
-                                                                                            class="img-responsive"
-                                                                                            alt=""></a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            کنسرت بزرگ استاد شجریان
-                        </h5>
-
-                        <div>
-                            <div class="price">
-                                <div class="item_add"><span class="item_price"><h6 class="meta">
-                                    از
-                                    ۵۰۰۰۰
-                                    تومان
-                                </h6></span></div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   سینمای آزادی
-                                   |
-                                    خیابان فلان، پلاک فلان و ...
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
+                {% endfor %}
                 <div class="clearfix"></div>
             </ul>
             <!--</div>
