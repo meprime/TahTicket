@@ -13,24 +13,26 @@
                 <div id="wowslider-container0" class="col-md-9">
                     <div class="ws_images" dir="ltr">
                         <ul>
-                            <li><a href="/event"><img src="{% static "data0/images/1.jpg" %}"
-                                                            title="کنسرت بزرگ استاد شجریان"
-                                                            id="wows0_0"/></a></li>
-                            <li><a href="/event"><img src="{% static "data0/images/2.jpg" %}" title="نمایش گزارش به آکادمی"
-                                                            id="wows0_1"/></a></li>
-                            <li><a href="/event"><img src="{% static "data0/images/3.jpg" %}"
-                                                            title="فیلم جدایی نادر از سیمین"
-                                                            id="wows0_2"/></a></li>
+                            {% for event in top_events %}
+                                {% with forloop.counter|stringformat:"s" as id %}
+                            <li><a href="/event/{{ event.id }}">
+                                <img src="{% static 'data0/images/'|add:id|add:'.jpg' %}"
+                                                            title="{{ event.name }}"
+                                                            id="wows0_{{ id }}"/>
+                            </a></li>
+                                {% endwith %}
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="ws_bullets">
                         <div>
-                            <a href="#" title="کنسرت بزرگ استاد شجریان"><span><img
-                                    src="{% static "data0/tooltips/1.jpg" %}"/>1</span></a>
-                            <a href="#" title="نمایش گزارش به آکادمی"><span><img
-                                    src="{% static "data0/tooltips/2.jpg" %}"/>2</span></a>
-                            <a href="#" title="فیلم جدایی نادر از سیمین"><span><img
-                                    src="{% static "data0/tooltips/3.jpg" %}"/>3</span></a>
+                            {% for event in top_events %}
+                                {% with forloop.counter|stringformat:"s" as id %}
+
+                            <a href="/event/{{ event.id }}" title="{{ event.name }}"><span><img
+                                    src="{% static 'data0/tooltips/'|add:id|add:'.jpg' %}"/>{{ id }}</span></a>
+                                {% endwith %}
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="ws_shadow"></div>

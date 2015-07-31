@@ -15,6 +15,12 @@ def index(request):
         if events.__len__() >= i:
             new_events.append(events[i])
 
+    tickets = Ticket.objects.all().order_by('sold')
+    top_events = []
+    for i in range(0, 3):
+        if tickets.__len__() >= i:
+            top_events.append(tickets[i].event)
+
     subtypes = SubType.objects.all()
     return render(request, 'index.html',
                   {
@@ -22,6 +28,7 @@ def index(request):
                       "images": images,
                       "subtypes": subtypes,
                       "new_events": new_events,
+                      "top_events": top_events,
                   })
 
 
