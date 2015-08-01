@@ -15,7 +15,7 @@ class Venue(models.Model):
 
 
 class Type(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     description = models.CharField(max_length=200, default="")
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Type(models.Model):
 
 
 class SubType(models.Model):
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=40, unique=True)
     type = models.ForeignKey(Type)
 
     def __str__(self):
