@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+{% load static %}
+
+<script type='text/javascript' src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+
+<title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Contact :: w3layouts</title>
+<link href="{% static "css/bootstrap.css" %}" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="{% static "fonts/font-awesome-4.3.0/css/font-awesome.min.css" %}"/>
+<link href="{% static "css/style.css" %}" rel='stylesheet' type='text/css' />
+<link href="{% static "css/general_template.css" %}" rel='stylesheet' type='text/css' />
+<link href="{% static "css/two_level_menu.css" %}" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+<!-- start menu -->
+<link href="{% static "css/megamenu.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="{% static "engine0/style.css" %}"/>
+<script type="text/javascript" src="{% static "js/megamenu.js" %}"></script>
+<script src="{% static "js/menu_jquery.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            //window.document.location = $(this).data("href");
+        });
+    });
+</script>
+
+<style>
+    a {
+        color: white;
+    }
+</style>
+
+    {% block header_extension %} <!-- HEADER EXTENSION --> {% endblock %}
+
+</head>
+<body dir="rtl">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" id="nav-container">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#page-top" style="padding-top: 0;">
+                <img src="{% static "images/logo-small.png"%}">
+
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                {% block login_btn %}
+                {% endblock %}
+
+            </ul>
+            <div class="col-sm-3 col-md-3 col-md-offset-3" dir="ltr">
+                <form class="navbar-form" role="search" action="/search">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                        <input type="text" class="form-control" placeholder="جست‌وجو" name="srch-term" id="srch-term"
+                               dir="rtl">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+{% block main_content %} <!-- MAIN CONTENT --> {% endblock %}
+
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+{% block end_extra %}  {% endblock %}
+</body>

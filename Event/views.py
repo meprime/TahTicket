@@ -118,7 +118,11 @@ def admin_types(request):
 
 def remove_type(request, type_id):
     try:
-        Type.objects.get(id=type_id).delete()
+        type = Type.objects.get(id=type_id)
+        if Event.objects.filter(type=type).count() == 0:
+            type.delete()
+        else:
+            pass  # better send an error message
     except:
         pass
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -126,7 +130,11 @@ def remove_type(request, type_id):
 
 def remove_subtype(request, subtype_id):
     try:
-        SubType.objects.get(id=subtype_id).delete()
+        subtype = SubType.objects.get(id=subtype_id)
+        if Event.objects.filter(sub_type=subtype).count() == 0:
+            type.delete()
+        else:
+            pass  # better send an error message
     except:
         pass
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -122,5 +122,22 @@ class CommentForm(forms.ModelForm):
         exclude = []
 
 
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        labels = {
+            'username': 'نام کاربری',
+            'password': 'رمز عبور',
+        }
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+
+
 class ForgotPasswordForm(forms.Form):
     email = forms.EmailField()
+
+
+class UploadImageForm(forms.Form):
+    image = forms.ImageField()

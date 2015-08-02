@@ -1,7 +1,32 @@
 from django.shortcuts import render
 
 from Event.models import *
-from Ticket.forms import ForgotPasswordForm
+from django.contrib.auth import authenticate, login, logout
+from Ticket.forms import ForgotPasswordForm, LoginForm
+
+
+def sign_in(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print("user logged in")
+            return HttpResponseRedirect("/timeline/")
+        else:
+            login_form = LoginForm(request.POST)
+
+    else:
+        login_form = LoginForm()
+
+    return render(request, "sign_in.html", {
+        'login_form': login_form
+        })
+
+
+def admin(request):
+    return render(request, 'admin.html')
 
 
 def index(request):
@@ -29,6 +54,7 @@ def index(request):
                       "subtypes": subtypes,
                       "new_events": new_events,
                       "top_events": top_events,
+                      'login_form': LoginForm(),  # ADDED BY SADRA
                   })
 
 
