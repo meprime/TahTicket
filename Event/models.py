@@ -27,7 +27,7 @@ class SubType(models.Model):
     type = models.ForeignKey(Type)
 
     def __str__(self):
-        return self.name
+        return self.type.name + ' - ' + self.name
 
 
 class Event(models.Model):

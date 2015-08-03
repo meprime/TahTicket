@@ -40,6 +40,16 @@
             {% endfor %}
             </tbody>
         </table>
+    <div>
+        <form method="post">
+نمایش رویدادها از تاریخ
+            {% csrf_token %}
+            <input type="text" class="datepicker" name="from-date">
+        تا تاریخ
+            <input type="text" class="datepicker" name="to-date">
+            <input type="submit" class="btn btn-primary" value="برو"/>
+        </form>
+    </div>
     </div>
     </div>
 {% endblock %}

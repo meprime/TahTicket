@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 class NewEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['organizer']
+        exclude = ['organizer', 'type']
 
         labels = {
             'title': _('عنوان'),
@@ -19,7 +19,7 @@ class NewEventForm(forms.ModelForm):
             'date': _('تاریخ'),
             'time': _('زمان'),
             'venue': _('مکان'),
-            'type': _('دسته'),
+            #'type': _('دسته'),
             'sub_type': _('زیردسته'),
         }
         widgets = {
@@ -141,3 +141,7 @@ class ForgotPasswordForm(forms.Form):
 
 class UploadImageForm(forms.Form):
     image = forms.ImageField()
+
+
+class DateForm(forms.Form):
+    date = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'}))

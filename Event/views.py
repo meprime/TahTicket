@@ -62,8 +62,10 @@ def new_event(request):
         if 'new-event' in request.POST:
             event_form = NewEventForm(request.POST)
             if event_form.is_valid():
-                new_event = event_form.save()
+                new_event = event_form.save(commit=False)
                 success_msg = 'رویداد جدید با موفقیت اضافه شد'
+                new_event.type = new_event.sub_type.type
+                new_event.save()
         if 'new-venue' in request.POST:
             venue_form = NewVenueForm(request.POST)
             if venue_form.is_valid():
