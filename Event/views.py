@@ -1,4 +1,5 @@
 # coding=utf-8
+import os
 from django.shortcuts import render
 from Ticket.forms import *
 from django.http import HttpResponseRedirect, Http404
@@ -47,6 +48,7 @@ def admin_event(request, event_id):
         'tickets': tickets,
         'ticket_form': ticket_form,
         'update_event_form': update_event_form,
+        'upload_image_form': UploadImageForm()
     })
 
 
@@ -73,6 +75,23 @@ def new_event(request):
         'success_message': success_msg,
         'error_message': error_msg,
     })
+
+
+@login_required(login_url='/')
+def upload_poster(request, event_id):
+    if request.method == 'POST':
+        form = UploadImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            img = request.FILES['image']
+            dest = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'Ticket', 'static', 'images', 'events', str(event_id)+'.jpg'), 'wb+')
+            for chunk in img.chunks():
+                dest.write(chunk)
+            dest.close()
+            form = UploadImageForm()
+    else:
+        form = UploadImageForm()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url='/')

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^admin-event/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.admin_event'),  # LATER COULD BE MERGED WITH EVENT
     url(r'^new-event/', 'Event.views.new_event'),
     url(r'^remove-event/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_event'),
+    url(r'^upload-poster/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.upload_poster'),
     url(r'^types/', 'Event.views.admin_types'),
     url(r'^remove-type/(?P<type_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_type'),
     url(r'^remove-subtype/(?P<subtype_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_subtype'),

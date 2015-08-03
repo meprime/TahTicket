@@ -3,12 +3,10 @@
 {% block header_extension %}
     {% load static %}
     <link href="{% static "form_style.css" %}" rel="stylesheet">
-    <link type="text/css" href="{% static "css/jquery-ui-1.8.14.css" %}" rel="stylesheet" />
-    <script type="text/javascript" src="{% static "js/jquery-1.6.2.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery.ui.core.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery.ui.datepicker-cc.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/calendar.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/jquery.ui.datepicker-cc-fa.js" %}"></script>
+    <link type="text/css" href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet" />
+    <link type="text/css" href="{% static "css/jquery-ui.structure.min.css" %}" rel="stylesheet" />
+    <link type="text/css" href="{% static "css/jquery-ui.theme.min.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
 
     <script type="text/javascript">
     $(function(){
