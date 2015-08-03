@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
+import datetime
 from Event.models import *
 from User.models import *
 from django.contrib.auth import authenticate, login, logout
-from Ticket.forms import ForgotPasswordForm, LoginForm
+from Ticket.forms import ForgotPasswordForm, LoginForm, DateForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404, HttpResponseForbidden
 
@@ -76,6 +77,17 @@ def user_tickets(request):
 @login_required(login_url='/')
 def admin_all_events(request):
     all_events = Event.objects.all()
+
+    if request.method == 'POST':
+        from_date = request.POST.get('from-date', None)
+        to_date = request.POST.get('to-date', None)
+        if from_date and to_date:
+            d1 = from_date.split('/')
+            d2 = to_date.split('/')
+            d1 = datetime.date(int(d1[2]), int(d1[0]), int(d1[1]))
+            d2 = datetime.date(int(d2[2]), int(d2[0]), int(d2[1]))
+            all_events = Event.objects.filter(date__lte=d2).filter(date__gte=d1)
+
     events = []
     for event in all_events:
         tickets = Ticket.objects.filter(event=event)
@@ -97,6 +109,8 @@ def admin_all_events(request):
 
     return render(request, 'organizer_events_list.html', {
         'events': events, 'login_form': LoginForm()
+        'from_date_form': DateForm(),
+        'to_date_form': DateForm(),
     })
 
 
