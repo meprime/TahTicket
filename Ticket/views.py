@@ -123,7 +123,12 @@ def forgot_password(request):
 
 
 def type_view(request, type_id):
-    return render(request, 'contact.html')
+    return render(request, 'Concert.html')
+
 
 def event_view(request, event_id):
     return render(request, 'details.html')
+
+
+def test_view(request):
+    return render(request, 'Concert.html')

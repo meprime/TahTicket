@@ -18,10 +18,10 @@ urlpatterns = [
     url(r'^ticket/', 'Event.views.show_ticket'),
     url(r'^all-events/', 'Ticket.views.admin_all_events'),
     url(r'^my-tickets/', 'Ticket.views.user_tickets'),
-    url(r'^checkout/', 'Ticket.views.checkout'),
+    url(r'^checkout/', 'Ticket.views.checkout', name='checkout'),
     url(r'^user-profile/', 'User.views.user_profile'),
     url(r'^search/', 'Ticket.views.search'),
-    url(r'^details/$', 'Event.views.details'),
+    url(r'^details/$', 'Event.views.details', name='details'),
     url(r'^details2/$', 'Event.views.details2'),
     url(r'^type/(?P<type_id>\d+)$', 'Ticket.views.type_view'),
     url(r'^type/(?P<type_id>\d+)/(?P<subtype_id>\d+)$', 'Ticket.views.type_view'),
@@ -29,5 +29,7 @@ urlpatterns = [
     url(r'^code$', 'Ticket.views.code'),
     url(r'^event/(?P<event_id>\d+)$', 'Ticket.views.event_view'),
     url(r'^forgot-password/', 'Ticket.views.forgot_password'),
+    url(r'^test/', 'Ticket.views.test_view'),
+
 
 ]
