@@ -4,7 +4,7 @@ from django.forms import Textarea
 from Ticket.models import ContactMessage
 from django.contrib.auth.models import User
 from User.models import UserProfile
-from Event.models import Event, Venue, Ticket
+from Event.models import Event, Venue, Ticket, Type, SubType
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -93,11 +93,51 @@ class UserUpdateForm(forms.Form):
     nl_memb = forms.BooleanField(label='عضویت در خبرنامه')  #newsletter membership
 
 
+class TypeForm(forms.ModelForm):
+    class Meta:
+        model = Type
+        exclude = []
+        labels = {
+            'name': 'نام دسته',
+            'description': 'توضیح دسته',
+        }
+        widgets = {
+            'description': Textarea(attrs={'cols': 40, 'rows': 2}),
+        }
+
+
+class SubTypeForm(forms.ModelForm):
+    class Meta:
+        model = SubType
+        exclude = []
+        labels = {
+            'name': 'نام زیردسته',
+            'type': 'دسته',
+        }
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         exclude = []
 
 
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        labels = {
+            'username': 'نام کاربری',
+            'password': 'رمز عبور',
+        }
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+
+
 class ForgotPasswordForm(forms.Form):
     email = forms.EmailField()
+
+
+class UploadImageForm(forms.Form):
+    image = forms.ImageField()

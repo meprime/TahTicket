@@ -1,0 +1,90 @@
+{% extends 'admin_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+    <link href="{% static "form_style.css" %}" rel="stylesheet">
+    <link type="text/css" href="{% static "css/jquery-ui-1.8.14.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "js/jquery-1.6.2.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.ui.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.ui.datepicker-cc.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/calendar.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.ui.datepicker-cc-fa.js" %}"></script>
+
+    <script type="text/javascript">
+    $(function(){
+        $('.datepicker').datepicker();
+    });
+    </script>
+{% endblock %}
+
+{% block main_content %}
+<div class="arriv">
+<div class="container">
+    <div style="text-align: center; color: green">{{ success_message }}</div>
+    <div style="text-align: center; color: red">{{ error_message }}</div>
+    <div class="main">
+        <div class="col-md-4">
+        <h3>
+            افزودن زیردسته‌ی جدید
+        </h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ subtype_form.as_table }}
+            <div>
+            <button type="submit" class="btn btn-primary" name="new-subtype">
+زیردسته را اضافه کن
+            </button>
+            </div>
+        </form>
+        </div>
+        <div class="col-md-4">
+        <h3>
+افزودن دسته‌ی جدید
+        </h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ type_form.as_table }}
+            <div>
+            <button type="submit" class="btn btn-primary" name="new-type">
+دسته را اضافه کن
+            </button>
+            </div>
+        </form>
+        </div>
+        <div class="col-md-4">
+            <h3>
+                دسته‌ها:
+            </h3>
+            <table class="table">
+                <tbody>
+                {% for type in types %}
+                    <tr>
+                        <td>
+                            <a data-toggle="collapse" href="#{{ type.id }}_subtypes" style="color: #ffffff"> {{ type.name }} </a>
+                        </td>
+                        <td>
+                            <a href="/remove-type/{{ type.id }}"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: #ff0000"></span></a>
+                        </td>
+                    </tr>
+                    <tr> <td id="{{ type.id }}_subtypes" class="collapse">
+                        <table class="table" style="background: inherit;">
+                            {% for subtype in type.subtypes %}
+                                <tr>
+                                    <td>
+                                        {{ subtype.name }}
+                                    </td>
+                                    <td>
+                                        <a href="/remove-subtype/{{ subtype.id }}"><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: #ff0000"></span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

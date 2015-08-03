@@ -3,11 +3,16 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^management/$', 'Ticket.views.admin'),
     url(r'^$', 'Ticket.views.index'),
+    url(r'^login/$', 'Ticket.views.sign_in'),
     url(r'^contact/$', 'Ticket.views.contact_us'),
     url(r'^admin-event/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.admin_event'),  # LATER COULD BE MERGED WITH EVENT
     url(r'^new-event/', 'Event.views.new_event'),
-    url(r'^remove-event/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_event'),  # LATER COULD BE MERGED WITH EVENT
+    url(r'^remove-event/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_event'),
+    url(r'^types/', 'Event.views.admin_types'),
+    url(r'^remove-type/(?P<type_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_type'),
+    url(r'^remove-subtype/(?P<subtype_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_subtype'),
     url(r'^ticket/', 'Event.views.show_ticket'),
     url(r'^all-events/', 'Ticket.views.admin_all_events'),
     url(r'^my-tickets/', 'Ticket.views.user_tickets'),

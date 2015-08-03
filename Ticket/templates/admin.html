@@ -1,0 +1,27 @@
+{% extends 'admin_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+{% endblock %}
+
+{% block main_content %}
+<div class="arriv">
+<div class="container">
+    <div style="text-align: center; color: green">{{ success_message }}</div>
+    <div style="text-align: center; color: red">{{ error_message }}</div>
+    <div class="main">
+        <ul class="list-group">
+            <li><a href="/all-events/">
+                مشاهده و مدیریت رویدادها
+            </a></li>
+            <li><a href="/new-event/">
+                ایجاد رویداد جدید
+            </a></li>
+            <li><a href="/types/">
+                مشاهده و مدیریت دسته‌ها
+            </a></li>
+        </ul>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -80,6 +80,66 @@ def remove_event(request, event_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def admin_types(request):
+    type_form = TypeForm
+    subtype_form = SubTypeForm
+    success_msg = ''
+    error_msg = ''
+    if request.method == 'POST':
+        if 'new-type' in request.POST:
+            type_form = TypeForm(request.POST)
+            if type_form.is_valid():
+                type_form.save()
+                success_msg = 'دسته‌ی جدید با موفقیت اضافه شد'
+        if 'new-subtype' in request.POST:
+            subtype_form = SubTypeForm(request.POST)
+            if subtype_form.is_valid():
+                subtype_form.save()
+                success_msg = 'زیردسته‌ی جدید با موفقیت اضافه شد'
+
+    types = Type.objects.all()
+    types_subtypes = []
+    for type in types:
+        s = SubType.objects.filter(type=type)
+        types_subtypes.append({
+            'name': type.name,
+            'id': type.id,
+            'subtypes': SubType.objects.filter(type=type),
+        })
+
+    return render(request, 'admin_types.html', {
+        'type_form': type_form,
+        'subtype_form': subtype_form,
+        'types': types_subtypes,
+        'success_message': success_msg,
+        'error_message': error_msg,
+    })
+
+
+def remove_type(request, type_id):
+    try:
+        type = Type.objects.get(id=type_id)
+        if Event.objects.filter(type=type).count() == 0:
+            type.delete()
+        else:
+            pass  # better send an error message
+    except:
+        pass
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def remove_subtype(request, subtype_id):
+    try:
+        subtype = SubType.objects.get(id=subtype_id)
+        if Event.objects.filter(sub_type=subtype).count() == 0:
+            type.delete()
+        else:
+            pass  # better send an error message
+    except:
+        pass
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def show_ticket(request):
     return render(request, 'ticket.html')
 
