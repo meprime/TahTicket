@@ -66,11 +66,11 @@ def index(request):
 
 
 def contact_us(request):
-    return render(request, 'contact.html')
+    return render(request, 'contact.html', {'login_form': LoginForm()})
 
 
 def user_tickets(request):
-    return render(request, 'user_tickets.html')
+    return render(request, 'user_tickets.html', {'login_form': LoginForm()})
 
 
 @login_required(login_url='/')
@@ -91,44 +91,46 @@ def admin_all_events(request):
             'id': event.id,
             'sold_tickets': sold_tickets.count(),
             'tickets_price': tickets_price,
+            'login_form': LoginForm()
         }
         events.append(e)
 
     return render(request, 'organizer_events_list.html', {
-        'events': events,
+        'events': events, 'login_form': LoginForm()
     })
 
 
 def search(request):
-    return render(request, 'shop.html')
+    return render(request, 'shop.html', {'login_form': LoginForm()})
 
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    return render(request, 'checkout.html', {'login_form': LoginForm()})
 
 
 def bank(request):
-    return render(request, 'fake_bank.html')
+    return render(request, 'fake_bank.html', {'login_form': LoginForm()})
 
 
 def code(request):
-    return render(request, 'code.html')
+    return render(request, 'code.html', {'login_form': LoginForm()})
 
 
 def forgot_password(request):
     form = ForgotPasswordForm()
     return render(request, 'forgot_password.html', {
         'form': form,
+        'login_form': LoginForm()
     })
 
 
 def type_view(request, type_id):
-    return render(request, 'Concert.html')
+    return render(request, 'Concert.html', {'login_form': LoginForm()})
 
 
 def event_view(request, event_id):
-    return render(request, 'details.html')
+    return render(request, 'details.html', {'login_form': LoginForm()})
 
 
 def test_view(request):
-    return render(request, 'Concert.html')
+    return render(request, 'Concert.html', {'login_form': LoginForm()})

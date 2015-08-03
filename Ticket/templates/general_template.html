@@ -8,37 +8,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 
-{% load static %}
+    {% load static %}
 
-<script type='text/javascript' src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+    <script type='text/javascript' src="{% static "js/jquery-1.11.1.min.js" %}"></script>
 
-<title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Contact :: w3layouts</title>
-<link href="{% static "css/bootstrap.css" %}" rel='stylesheet' type='text/css' />
-<link rel="stylesheet" href="{% static "fonts/font-awesome-4.3.0/css/font-awesome.min.css" %}"/>
-<link href="{% static "css/style.css" %}" rel='stylesheet' type='text/css' />
-<link href="{% static "css/general_template.css" %}" rel='stylesheet' type='text/css' />
-<link href="{% static "css/two_level_menu.css" %}" rel='stylesheet' type='text/css' />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+    <title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Contact :: w3layouts</title>
+    <link href="{% static "css/bootstrap.css" %}" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="{% static "fonts/font-awesome-4.3.0/css/font-awesome.min.css" %}"/>
+    <link href="{% static "css/style.css" %}" rel='stylesheet' type='text/css' />
+    <link href="{% static "css/general_template.css" %}" rel='stylesheet' type='text/css' />
+    <link href="{% static "css/two_level_menu.css" %}" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
-<!-- start menu -->
-<link href="{% static "css/megamenu.css" %}" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" type="text/css" href="{% static "engine0/style.css" %}"/>
-<script type="text/javascript" src="{% static "js/megamenu.js" %}"></script>
-<script src="{% static "js/menu_jquery.js" %}"></script>
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+    <!-- start menu -->
+    <link href="{% static "css/megamenu.css" %}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{% static "engine0/style.css" %}"/>
+    <script type="text/javascript" src="{% static "js/megamenu.js" %}"></script>
+    <script src="{% static "js/menu_jquery.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
 
-<script>
-    jQuery(document).ready(function($) {
-        $(".clickable-row").click(function() {
-            //window.document.location = $(this).data("href");
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                //window.document.location = $(this).data("href");
+            });
         });
-    });
-</script>
+    </script>
 
     {% block header_extension %} <!-- HEADER EXTENSION --> {% endblock %}
 
@@ -69,13 +69,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <a href="#page-top"></a>
                 </li>
                 {% block login_btn %}
-                <li>
-                    <a id="login_text" class="btn btn-ticket" style="color: #ffffff;padding: 5px;" data-toggle="modal"
-                       data-target="#login-modal">
-                        <i class="fa fa-lock"></i>
-                        ورود
-                    </a>
-                </li>
+                    <li>
+                        <a id="login_text" class="btn btn-ticket" style="color: #ffffff;padding: 5px;" data-toggle="modal"
+                           data-target="#login-modal">
+                            <i class="fa fa-lock"></i>
+                            ورود
+                        </a>
+                    </li>
                 {% endblock %}
                 <li>
                     <a href="/checkout" class="btn btn-ticket" style="color: #ffffff;padding: 5px;">
@@ -111,16 +111,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a class="color1" href="/">خانه</a>
             </li>
             {% for type in types %}
-            <li>
-                <a class="color3" href="/type/{{ type.id }}">{{ type.name }}</a>
-                <ul class="second-level-menu">
-                    {% for subtype in subtypes %}
-                        {% if subtype.type.name == type.name %}
-                            <li><a href="/type/{{ type.id }}/{{ subtype.id }}">{{ subtype.name }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </li>
+                <li>
+                    <a class="color3" href="/type/{{ type.id }}">{{ type.name }}</a>
+                    <ul class="second-level-menu">
+                        {% for subtype in subtypes %}
+                            {% if subtype.type.name == type.name %}
+                                <li><a href="/type/{{ type.id }}/{{ subtype.id }}">{{ subtype.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -218,22 +218,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="form-group">
                                 <label for="phone_no">
-شماره‌ی تماس
+                                    شماره‌ی تماس
                                 </label>
                                 <input type="text" class="form-control" id="phone_no">
                             </div>
                             <div class="form-group">
                                 <div class="radio">
-                                  <label>
-                                    <input type="radio" name="gender" id="gender" value="M" checked>
-                                    مرد
-                                  </label>
+                                    <label>
+                                        <input type="radio" name="gender" id="gender" value="M" checked>
+                                        مرد
+                                    </label>
                                 </div>
                                 <div class="radio">
-                                  <label>
-                                    <input type="radio" name="gender" id="gender" value="F">
-                                    زن
-                                  </label>
+                                    <label>
+                                        <input type="radio" name="gender" id="gender" value="F">
+                                        زن
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group">
