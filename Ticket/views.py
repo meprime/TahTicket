@@ -6,7 +6,7 @@ from User.models import *
 from django.contrib.auth import authenticate, login, logout
 from Ticket.forms import ForgotPasswordForm, LoginForm, DateForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 
 
 def sign_in(request):
@@ -149,3 +149,7 @@ def event_view(request, event_id):
 
 def test_view(request):
     return render(request, 'Concert.html', {'login_form': LoginForm()})
+
+
+def type_type_view(request, type_id, subtype_id):
+    return render(request, 'contact.html', {'login_form': LoginForm()})
