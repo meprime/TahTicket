@@ -2,17 +2,6 @@
 
 {% block header_extension %}
     {% load static %}
-    <link href="{% static "form_style.css" %}" rel="stylesheet">
-    <link type="text/css" href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet" />
-    <link type="text/css" href="{% static "css/jquery-ui.structure.min.css" %}" rel="stylesheet" />
-    <link type="text/css" href="{% static "css/jquery-ui.theme.min.css" %}" rel="stylesheet" />
-    <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
-
-    <script type="text/javascript">
-    $(function(){
-        $('.datepicker').datepicker();
-    });
-    </script>
 {% endblock %}
 
 {% block main_content %}
@@ -91,13 +80,13 @@
                     دسته
                 </dt>
                 <dd>
-                    {{ event.type }}
+                    {{ event.type.name }}
                 </dd>
                 <dt>
                     زیردسته
                 </dt>
                 <dd>
-                    {{ event.sub_type }}
+                    {{ event.sub_type.name }}
                 </dd>
             </dl>
         </div>
