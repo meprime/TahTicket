@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
 from Event.models import *
+from User.models import *
 from django.contrib.auth import authenticate, login, logout
 from Ticket.forms import ForgotPasswordForm, LoginForm
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, Http404, HttpResponseForbidden
 
 
 def sign_in(request):
@@ -11,21 +14,24 @@ def sign_in(request):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            login(request, user)
-            print("user logged in")
-            return HttpResponseRedirect("/timeline/")
+            if Admin.objects.filter(user=user).count():  # logging admin in
+                login(request, user)
+                print('admin logged in')
+                return HttpResponseRedirect('/management/')
         else:
-            login_form = LoginForm(request.POST)
-
-    else:
-        login_form = LoginForm()
-
-    return render(request, "sign_in.html", {
-        'login_form': login_form
-        })
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def sign_out(request):
+    logout(request)
+    return HttpResponseRedirect("/")
+
+
+@login_required(login_url='/')
 def admin(request):
+    if Admin.objects.filter(user=request.user).count() == 0:                     # SHOULD ACTUALLY BE DONE WITH A DECORATOR, BUT... :-|
+        return HttpResponseForbidden('You think you are admin?! Dream on!')
+
     return render(request, 'admin.html')
 
 
@@ -66,6 +72,7 @@ def user_tickets(request):
     return render(request, 'user_tickets.html')
 
 
+@login_required(login_url='/')
 def admin_all_events(request):
     all_events = Event.objects.all()
     events = []
