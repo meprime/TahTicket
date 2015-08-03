@@ -108,7 +108,8 @@ def admin_all_events(request):
         events.append(e)
 
     return render(request, 'organizer_events_list.html', {
-        'events': events, 'login_form': LoginForm()
+        'events': events,
+        'login_form': LoginForm(),
         'from_date_form': DateForm(),
         'to_date_form': DateForm(),
     })
