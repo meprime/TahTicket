@@ -23,10 +23,11 @@ urlpatterns = [
     url(r'^search/', 'Ticket.views.search'),
     url(r'^details/$', 'Event.views.details'),
     url(r'^details2/$', 'Event.views.details2'),
-    url(r'^type/(?P<type_id>\d+)$', 'Ticket.views.type'),
-    url(r'^type/(?P<type_id>\d+)/(?P<subtype_id>\d+)$', 'Ticket.views.type'),
+    url(r'^type/(?P<type_id>\d+)$', 'Ticket.views.type_view'),
+    url(r'^type/(?P<type_id>\d+)/(?P<subtype_id>\d+)$', 'Ticket.views.type_view'),
     url(r'^fake_bank$', 'Ticket.views.bank'),
     url(r'^code$', 'Ticket.views.code'),
+    url(r'^event/(?P<event_id>\d+)$', 'Ticket.views.event_view'),
     url(r'^forgot-password/', 'Ticket.views.forgot_password'),
 
 ]

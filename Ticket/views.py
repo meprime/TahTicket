@@ -29,7 +29,8 @@ def sign_out(request):
 
 @login_required(login_url='/')
 def admin(request):
-    if Admin.objects.filter(user=request.user).count() == 0:                     # SHOULD ACTUALLY BE DONE WITH A DECORATOR, BUT... :-|
+    if Admin.objects.filter(user=request.user).count() == 0:
+        # SHOULD ACTUALLY BE DONE WITH A DECORATOR, BUT... :-|
         return HttpResponseForbidden('You think you are admin?! Dream on!')
 
     return render(request, 'admin.html')
@@ -121,5 +122,8 @@ def forgot_password(request):
     })
 
 
-def type(request, type_id):
-    render(request, 'contact.html')
+def type_view(request, type_id):
+    return render(request, 'contact.html')
+
+def event_view(request, event_id):
+    return render(request, 'details.html')
