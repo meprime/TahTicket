@@ -169,8 +169,14 @@ def type_view(request, type_id):
 def type_type_view(request, type_id, subtype_id):
     types = Type.objects.all()
     subtypes = SubType.objects.all()
-    return render(request, 'contact.html', {
+    subtype = SubType.objects.filter(id=subtype_id)[0]
+    events = Event.objects.filter(sub_type=subtype)
+    type = Type.objects.filter(id=type_id)[0]
+    return render(request, 'subtype.html', {
         "subtypes": subtypes,
         "types": types,
+        "c_subtype": subtype,
+        "c_type": type,
+        "events": events,
         'login_form': LoginForm()
     })

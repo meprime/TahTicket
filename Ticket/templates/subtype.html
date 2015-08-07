@@ -7,10 +7,10 @@
 {% block main_content %}
     <section>
         <div class="container">
-            <h1>{{ c_type.name }}</h1>
-            <h4>{{ c_type.description }}</h4>
+            <h2>{{ c_type.name }}</h2>
+            <h3 style="margin-right: 20px">{{ c_subtype.name }}</h3>
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-12">
                     <div class="special">
                         <div class="container">
                             <ul class="grid_2">
@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    {% if forloop.counter|divisibleby:3 %}
+                                    {% if forloop.counter|divisibleby:4 %}
 
                                         <div class="clearfix" style="padding-bottom: 10px"></div>
                                     {% endif %}
@@ -65,26 +65,6 @@
                             <!--</div>
                         </div>-->
                         </div>
-
-                    </div>
-                </div>
-
-                <div class="col-sm-3" style="margin-top: 65px">
-                    <div class="left-sidebar">
-                        <div class="panel-group category-products" id="accordian" style="background-color: #1b242f">
-                            <!--category-productsr-->
-                            <div class="panel panel-primary">
-
-                                <ul>
-                                    {% for subtype in c_subtypes %}
-                                        <li><a href="/type/{{ c_type.id }}/{{ subtype.id }}">{{ subtype.name }}</a></li>
-                                    {% endfor %}
-                                </ul>
-
-
-                            </div>
-                        </div>
-                        <!--/category-productsr-->
 
                     </div>
                 </div>
