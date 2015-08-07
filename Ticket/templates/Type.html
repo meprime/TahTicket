@@ -1,0 +1,94 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+{% endblock %}
+
+{% block main_content %}
+    <section>
+        <div class="container">
+            <h1>{{ c_type.name }}</h1>
+            <h4>{{ c_type.description }}</h4>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="special">
+                        <div class="container">
+                            <ul class="grid_2">
+                                {% for event in events %}
+
+                                    <li class="pull-right">
+                                        <div>
+                                            <a href="/event/{{ event.id }}" class="portfolio-link">
+                                                <div class="caption">
+                                                    <div class="caption-content">
+                                                        <p>
+                                                            <i class="fa fa-calendar"></i>
+                                                            {{ event.date }}
+                                                            <br>
+                                                            <i class="fa fa-clock-o"></i>
+                                                            {{ event.time }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                {% with event.id|stringformat:"s" as id %}
+                                                    <img src="{% static 'images/events/'|add:id|add:'.jpg' %}"
+                                                         class="img-responsive" alt="">
+                                                {% endwith %}
+                                            </a>
+                                        </div>
+                                        <div class="special-info grid_1 simpleCart_shelfItem">
+                                            <div class="price">
+                                                <div class="item_add">
+                                    <span class="item_price">
+                                        <h6 class="meta">{{ event.title }}</h6>
+                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="location pull-left">
+                                                <a style="padding-left: 5px" data-toggle="popover"
+                                                   data-placement="bottom"
+                                                   data-content="{{ event.venue.address }}">
+                                                    <i class="fa fa-2x fa-map-marker"></i>
+                                                </a>
+                                                <a href="/checkout" style="padding-left: 5px">
+                                                    <i class="fa fa-2x fa-cart-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% if forloop.counter|divisibleby:3 %}
+
+                                        <div class="clearfix" style="padding-bottom: 10px"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            <!--</div>
+                        </div>-->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-3" style="margin-top: 65px">
+                    <div class="left-sidebar">
+                        <div class="panel-group category-products" id="accordian" style="background-color: #1b242f">
+                            <!--category-productsr-->
+                            <div class="panel panel-primary">
+
+                                <ul>
+                                    {% for subtype in c_subtypes %}
+                                        <li><a href="type/{{ c_type.id }}/{{ subtype.id }}">{{ subtype.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+
+
+                            </div>
+                        </div>
+                        <!--/category-productsr-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

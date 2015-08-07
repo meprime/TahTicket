@@ -42,13 +42,14 @@ def index(request):
     images = []
     for i in range(1, types.__sizeof__()):
         images += "images/type/" + i.__str__() + ".jpg"
-    events = Event.objects.all()
+    events = Event.objects.all().order_by("-id")
     new_events = []
     for i in range(0, 4):
         if events.__len__() >= i:
             new_events.append(events[i])
+            print(events[i].title)
 
-    tickets = Ticket.objects.all().order_by('sold')
+    tickets = Ticket.objects.all().order_by("-sold")
     top_events = []
     for i in range(0, 3):
         if tickets.__len__() >= i:
@@ -139,17 +140,37 @@ def forgot_password(request):
     })
 
 
-def type_view(request, type_id):
-    return render(request, 'Concert.html', {'login_form': LoginForm()})
-
-
 def event_view(request, event_id):
     return render(request, 'details.html', {'login_form': LoginForm()})
 
 
 def test_view(request):
-    return render(request, 'Concert.html', {'login_form': LoginForm()})
+    return render(request, 'Type.html', {'login_form': LoginForm()})
+
+
+def type_view(request, type_id):
+    types = Type.objects.all()
+    subtypes = SubType.objects.all()
+    c_type = Type.objects.filter(id=type_id)[0]
+    events = Event.objects.filter(type=c_type)
+    c_subtypes = SubType.objects.filter(type=c_type)
+    print(c_type)
+    print(events)
+    return render(request, 'Type.html', {
+        "subtypes": subtypes,
+        "types": types,
+        "c_type": c_type,
+        "c_subtypes": c_subtypes,
+        'login_form': LoginForm(),
+        'events': events
+        })
 
 
 def type_type_view(request, type_id, subtype_id):
-    return render(request, 'contact.html', {'login_form': LoginForm()})
+    types = Type.objects.all()
+    subtypes = SubType.objects.all()
+    return render(request, 'contact.html', {
+        "subtypes": subtypes,
+        "types": types,
+        'login_form': LoginForm()
+    })
