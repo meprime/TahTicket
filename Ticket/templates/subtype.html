@@ -7,12 +7,20 @@
 {% block main_content %}
     <section>
         <div class="container">
-            <h2>{{ c_type.name }}</h2>
+            <a href="/type/{{ c_type.id }}" class="type_header"><h1 class="type_header">{{ c_type.name }}</h1></a>
             <h3 style="margin-right: 20px">{{ c_subtype.name }}</h3>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="special">
                         <div class="container">
+                            {% if empty == 1 %}
+                                متاسفانه هنوز رویدادی
+برای زیردسته‌ی
+{{ c_subtype.name }}
+از دسته‌ی
+                               {{ c_type.name }}
+                               وجود ندارد.
+                            {% endif %}
                             <ul class="grid_2">
                                 {% for event in events %}
 

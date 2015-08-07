@@ -12,6 +12,14 @@ p {
     margin: 0;
 }
 
+.type_header{
+    color: white;
+}
+
+.type_header:hover{
+    color: #00405d;
+}
+
 .cat-right{
     padding-right: 0px;
 }

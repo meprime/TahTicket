@@ -5,315 +5,156 @@
     <link href="{% static "css/prettyPhoto.css" %}" rel="stylesheet">
     <link href="{% static "css/price-range.css" %}" rel="stylesheet">
     <link href="{% static "css/animate.css" %}" rel="stylesheet">
-	<link href="{% static "css/main.css" %}" rel="stylesheet">
-	<link href="{% static "css/responsive.css" %}" rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <link href="{% static "css/responsive.css" %}" rel="stylesheet">
 {% endblock %}
 {% block main_content %}
-	<section>
-		<div class="container">
-			<div class="row" style="margin-top: 150px">
-                <div class="col-sm-9">
-					    <div class="special">
+    <section>
         <div class="container">
-            <ul class="grid_2">
-                <li class="pull-right">
-                    <div>
-                        <a href="/event" class="portfolio-link">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div>
-                            <img src="{% static "images/teather.jpg" %}" class="img-responsive" alt="">
-                        </a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            نمایش تنهایی
-                        </h5>
+            <div class="row" style="margin-top: 150px">
+                <div class="col-sm-9">
+                    <div class="special">
+                        <div class="container">
+                                {% if empty == 1%}
+                                    نتیجه‌ای یافت نشد.
+                                {% endif %}
+                            <ul class="grid_2">
+                                {% for event in result %}
+                                    <li class="pull-right">
+                                        <div>
+                                            <a href="/event/{{ event.id }}" class="portfolio-link">
+                                                <div class="caption">
+                                                    <div class="caption-content">
+                                                        <p>
+                                                            <i class="fa fa-calendar"></i>
+                                                            {{ event.date }}
+                                                            <br>
+                                                            <i class="fa fa-clock-o"></i>
+                                                            {{ event.time }}
+                                                        </p>
+                                                    </div>
+                                                </div>
 
-                        <div>
-                            <div class="price">
-                                <div class="item_add">
-                                    <span class="item_price">
-                                        <h6 class="meta">
-                                            از
-                                            ۵۰۰۰ تومان
-                                        </h6>
+                                                {% with event.id|stringformat:"s" as id %}
+                                                    <img src="{% static 'images/events/'|add:id|add:'.jpg' %}"
+                                                         class="img-responsive" alt="">
+                                                {% endwith %}
+                                            </a>
+                                        </div>
+                                        <div class="special-info grid_1 simpleCart_shelfItem">
+                                            <div>
+                                                <div class="price">
+                                                    <div class="item_add">
+                                                                        <span class="item_price">
+                                        <h6 class="meta">{{ event.title }}</h6>
                                     </span>
-                                </div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   تئاتر شهر
-                                   |
-                                    خیابان انقلاب اسلامی، جنب پارک دانشجو
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
-                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="location pull-left">
+                                                    <a style="padding-left: 5px" data-toggle="popover"
+                                                       data-placement="bottom"
+                                                       data-content="{{ event.venue.address }}">
+                                                        <i class="fa fa-2x fa-map-marker"></i>
+                                                    </a>
+                                                    <a href="/checkout" style="padding-left: 5px">
+                                                        <i class="fa fa-2x fa-cart-plus"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    {% if forloop.counter|divisibleby:3 %}
+                                        <div class="clearfix" style="padding-bottom: 10px"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            <!--</div>
+                        </div>-->
                         </div>
 
                     </div>
-                </li>
-                <li class="pull-right">
-                    <div>
-                        <a href="/event" class="portfolio-link"><img src="{% static "images/20off.png" %}" class="off"><div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div><img src="{% static "images/pepe.jpg" %}"
-                                                                                            class="img-responsive"
-                                                                                            alt=""></a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            مسابقه‌ی دوستانه‌ی رئال مادرید و بارسلونا
-                        </h5>
+                </div>
 
-                        <div>
-                            <div class="price">
-                                <div class="item_add"><span class="item_price"><h6 class="meta">
-                                    از
-                                    ۱۵۰۰۰
-                                    تومان
-                                </h6></span></div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   ورزشگاه آزادی
-                                   |
-                                    خیابان فلان، پلاک فلان و ...
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
+                <div class="col-sm-3" style="margin-top: 50px">
+                    <div class="left-sidebar">
+                        <div class="panel-group category-products" id="accordian" style="background-color: #1b242f">
+                            <!--category-productsr-->
+                            {% for type in types %}
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading" style="border: 0">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#type{{ type.id }}"
+                                               style="text-decoration: none">
+                                                <span class="badge"><i class="fa fa-plus"></i></span>
+                                            </a>
+                                            <a href="?stype={{ type.id }}-0">
+                                                {{ type.name }}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="type{{ type.id }}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                {% for subtype in subtypes %}
+                                                    {% if subtype.type.id == type.id %}
+                                                        <li><a href="?stype={{ type.id }}-{{ subtype.id }}">{{ subtype.name }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!--/category-productsr-->
+                        <div class="price-range" style="background-color: #1b242f"><!--price-range-->
+                            <div class="well" style="background-color: #1b242f">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" style="color: #000000" name="q" class="form-control"
+                                               value="{{ query }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select name="stype" style="color: #000000" class="form-control">
+                                            <option value="0-0">همه</option>
+                                            {% for ctype in types %}
+                                                {% if ctype.id == type and stype == 0%}
+                                                    <option value="{{ ctype.id }}-0" selected="selected">{{ ctype.name }} - همه</option>
+                                                {% else %}
+                                                    <option value="{{ ctype.id }}-0">{{ ctype.name }} - همه</option>
+                                                {% endif %}
+                                                {% endfor %}
+                                            {% for subtype in subtypes %}
+                                                {% if subtype.id == stype %}
+                                                    <option value="{{ subtype.type.id }}-{{ subtype.id }}" selected="selected">{{ subtype.type.name }}
+                                                    - {{ subtype.name }}</option>
+                                                {% else %}
+                                                <option value="{{ subtype.type.id }}-{{ subtype.id }}">{{ subtype.type.name }}
+                                                    - {{ subtype.name }}</option>
+
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="جست‌وجو">
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <li class="pull-right">
-                    <div>
-                        <a href="/event" class="portfolio-link">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div>
-                            <img src="{% static "images/Santori.jpg" %}" class="img-responsive" alt=""></a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            فیلم سنتوری
-                        </h5>
+                        <!--/price-range-->
 
-                        <div>
-                            <div class="price">
-                                <div class="item_add"><span class="item_price"><h6 class="meta">
-                                    ۴۰۰۰
-                                    تومان
-                                </h6></span></div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   سینمای آزادی
-                                   |
-                                    خیابان فلان، پلاک فلان و ...
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
-                </li>
-                <div class="clearfix" style="padding-bottom: 10px"></div>
-                <li class="pull-right">
-                    <div>
-                        <a href="/event" class="portfolio-link"><img src="{% static "images/20off.png" %}" class="off">
-                            <div class="caption">
-                                <div class="caption-content">
-                                    <p>
-                                        <i class="fa fa-calendar"></i>
-                                        شنبه
-                                        <br>
-                                        <i class="fa fa-clock-o"></i>
-                                        ۱۶:۰۰ - ۱۸:۰۰
-                                    </p>
-                                </div>
-                            </div>
-                            <img src="{% static "images/concert.jpg" %}"
-                                                                                            class="img-responsive"
-                                                                                            alt=""></a>
-                    </div>
-                    <div class="special-info grid_1 simpleCart_shelfItem">
-                        <h5 style="border-bottom: 1px lightgray solid;padding-bottom:5px;text-align: right; padding-right: 5px;">
-                            کنسرت بزرگ استاد شجریان
-                        </h5>
-
-                        <div>
-                            <div class="price">
-                                <div class="item_add"><span class="item_price"><h6 class="meta">
-                                    از
-                                    ۵۰۰۰۰
-                                    تومان
-                                </h6></span></div>
-                            </div>
-                            <div class="location pull-left">
-                                <a style="padding-left: 5px" data-toggle="popover" data-placement="bottom"
-                                   data-content="
-                                   سینمای آزادی
-                                   |
-                                    خیابان فلان، پلاک فلان و ...
-                                   ">
-                                    <i class="fa fa-2x fa-map-marker"></i>
-                                </a>
-                                <a href="/checkout" style="padding-left: 5px">
-                                    <i class="fa fa-2x fa-cart-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--</div>
-        </div>-->
+                </div>
+            </div>
         </div>
-
-    </div>
-				</div>
-
-				<div class="col-sm-3" style="margin-top: 50px">
-					<div class="left-sidebar">
-						<div class="panel-group category-products" id="accordian"  style="background-color: #1b242f"><!--category-productsr-->
-							<div class="panel panel-primary">
-								<div class="panel-heading" style="border: 0">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#concert" style="text-decoration: none">
-					 						<span class="badge"><i class="fa fa-plus"></i></span>
-											کنسرت‌
-										</a>
-									</h4>
-								</div>
-								<div id="concert" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">کلاسیک </a></li>
-											<li><a href="">پاپ </a></li>
-											<li><a href="">راک </a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-                            <div class="panel panel-primary">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sports" style="text-decoration: none">
-											<span class="badge"><i class="fa fa-plus"></i></span>
-											ورزشی
-										</a>
-									</h4>
-								</div>
-								<div id="sports" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">فوتبال </a></li>
-											<li><a href="">والیبال</a></li>
-											<li><a href="">بسکتبال </a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-                            <div class="panel panel-primary">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#cinema" style="text-decoration: none">
-											<span class="badge"><i class="fa fa-plus"></i></span>
-											سینما
-										</a>
-									</h4>
-								</div>
-								<div id="cinema" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">درام </a></li>
-											<li><a href="">کمدی</a></li>
-											<li><a href="">تراژدی </a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-                            <div class="panel panel-primary">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#theater" style="text-decoration: none">
-											<span class="badge"><i class="fa fa-plus"></i></span>
-											تئاتر
-										</a>
-									</h4>
-								</div>
-								<div id="theater" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">درام </a></li>
-											<li><a href="">کمدی</a></li>
-											<li><a href="">تراژدی </a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div><!--/category-productsr-->
-						<div class="price-range" style="background-color: #1b242f"><!--price-range-->
-							<div class="well" style="background-color: #1b242f">
-                            <h3>حدود قیمت</h3>
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="200000" data-slider-step="1000" data-slider-value="[30000,60000]" id="sl2" ><br />
-								 <b class="pull-left">۰</b> <b>
-                                ۲۰۰ هزار تومان
-                            </b>
-							</div>
-						</div><!--/price-range-->
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    </section>
 {% endblock %}
 
-  {% block end_extra %}
-	<script src="{% static "js/price-range.js" %}"></script>
+{% block end_extra %}
+    <script src="{% static "js/price-range.js" %}"></script>
     <script src="{% static "js/jquery.scrollUp.min.js" %}"></script>
     <script src="{% static "js/jquery.prettyPhoto.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>

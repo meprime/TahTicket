@@ -13,6 +13,12 @@
                 <div class="col-sm-9">
                     <div class="special">
                         <div class="container">
+                                                    {% if empty == 1 %}
+                                متاسفانه هنوز رویدادی
+برای دسته‌ی
+                               {{ c_type.name }}
+                               وجود ندارد.
+                            {% endif %}
                             <ul class="grid_2">
                                 {% for event in events %}
 

@@ -117,7 +117,71 @@ def admin_all_events(request):
 
 
 def search(request):
-    return render(request, 'shop.html', {'login_form': LoginForm()})
+    query = request.GET.get('q')
+    stype = request.GET.get('stype')
+    price = request.GET.get('price')
+    result = Event.objects.all()
+    st_val = 0
+    t_val = 0
+
+    if stype is not None and stype != "0-0":
+        print("TYPE" + stype)
+        tmp = stype.split("-")
+        t_val = int(tmp[0])
+        if tmp[1] != "0":
+            subtype_list = SubType.objects.filter(id=tmp[1])
+            if subtype_list is not None and subtype_list.__len__() > 0:
+                result = result.filter(sub_type=subtype_list[0])
+                st_val = int(tmp[1])
+        else:
+            type_list = Type.objects.filter(id=tmp[0])
+            if type_list is not None and type_list.__len__() > 0:
+                result = result.filter(type=type_list[0])
+            st_val = 0
+    if price is not None:
+        prices = price.split("%2C")
+        low_price = prices[0]
+        high_price = prices[1]
+        print(low_price)
+        print(high_price)
+
+    if query is not None and query != "":
+        result = process_query_users(query, result)
+    else:
+        query = ""
+
+    empty = 0
+    if result.__len__() == 0:
+        empty = 1
+
+    types = Type.objects.all()
+    subtypes = SubType.objects.all()
+    print(subtypes)
+
+    return render(request, 'shop.html', {
+        "empty": empty,
+        "query": query,
+        "type": t_val,
+        "stype": st_val,
+        "subtypes": subtypes,
+        "types": types,
+        'result': result,
+        'login_form': LoginForm()
+    })
+
+
+def process_query_users(query, result):
+    results = []
+    temp = query.split('+')
+    terms = []
+    print(temp)
+    for term in temp:
+        print(term + "1")
+        terms += term.split(' ')
+    for term in terms:
+        print(term)
+        results += result.filter(title__contains=term)
+    return results
 
 
 def checkout(request):
@@ -156,14 +220,18 @@ def type_view(request, type_id):
     c_subtypes = SubType.objects.filter(type=c_type)
     print(c_type)
     print(events)
+    empty = 0
+    if events.__len__() == 0:
+        empty = 1
     return render(request, 'Type.html', {
+        "empty": empty,
         "subtypes": subtypes,
         "types": types,
         "c_type": c_type,
         "c_subtypes": c_subtypes,
         'login_form': LoginForm(),
         'events': events
-        })
+    })
 
 
 def type_type_view(request, type_id, subtype_id):
@@ -172,7 +240,11 @@ def type_type_view(request, type_id, subtype_id):
     subtype = SubType.objects.filter(id=subtype_id)[0]
     events = Event.objects.filter(sub_type=subtype)
     type = Type.objects.filter(id=type_id)[0]
+    empty = 0
+    if events.__len__() == 0:
+        empty = 1
     return render(request, 'subtype.html', {
+        "empty": empty,
         "subtypes": subtypes,
         "types": types,
         "c_subtype": subtype,
