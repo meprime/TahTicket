@@ -1,12 +1,14 @@
 from User.models import Admin
 from django.http import HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import *
 
 
-@login_required()
-def admin_login_required(func):
-    def wrapper(request):
-        if Admin.objects.filter(user=request.user).count() == 0:
-            return HttpResponseForbidden('You think you are admin?! Dream on!')
-        return func
-    return wrapper
+def admin_login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url=None):
+    actual_decorator = user_passes_test(
+        lambda u: u.is_authenticated() and Admin.objects.filter(user=u).count() > 0,
+        login_url=login_url,
+        redirect_field_name=redirect_field_name
+    )
+    if function:
+        return actual_decorator(function)
+    return actual_decorator

@@ -75,6 +75,22 @@ class UserRegistrationForm(forms.ModelForm):
             'password': _('رمز عبور'),
             'email': _('ایمیل'),
         }
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+
+
+class UserProfileRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['gender', 'phone_no']
+        labels = {
+            'gender': _(''),
+            'phone_no': _('شماره‌ی تماس'),
+        }
+        widgets = {
+            'gender': forms.RadioSelect
+        }
 
 
 class CustomerRegistrationForm(forms.ModelForm):

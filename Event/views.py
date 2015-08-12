@@ -2,11 +2,12 @@
 import os
 from django.shortcuts import render
 from Ticket.forms import *
+from Ticket.decorators import admin_login_required
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def admin_event(request, event_id):
     try:
         event = Event.objects.get(id=event_id)
@@ -52,7 +53,7 @@ def admin_event(request, event_id):
     })
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def new_event(request):
     event_form = NewEventForm
     venue_form = NewVenueForm
@@ -79,7 +80,7 @@ def new_event(request):
     })
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def upload_poster(request, event_id):
     if request.method == 'POST':
         form = UploadImageForm(request.POST, request.FILES)
@@ -96,7 +97,7 @@ def upload_poster(request, event_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def remove_event(request, event_id):
     try:
         Event.objects.get(id=event_id).delete()
@@ -105,7 +106,7 @@ def remove_event(request, event_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def admin_types(request):
     type_form = TypeForm
     subtype_form = SubTypeForm
@@ -142,7 +143,7 @@ def admin_types(request):
     })
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def remove_type(request, type_id):
     try:
         type = Type.objects.get(id=type_id)
@@ -155,7 +156,7 @@ def remove_type(request, type_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required(login_url='/')
+@admin_login_required(login_url='/')
 def remove_subtype(request, subtype_id):
     try:
         subtype = SubType.objects.get(id=subtype_id)

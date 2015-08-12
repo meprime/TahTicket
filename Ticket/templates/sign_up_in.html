@@ -1,0 +1,56 @@
+{% extends 'general_template.html' %}
+
+{% block header_extension %}
+    {% load static %}
+    <link href="{% static "form_style.css" %}" rel="stylesheet">
+    <link type="text/css" href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet" />
+    <link type="text/css" href="{% static "css/jquery-ui.structure.min.css" %}" rel="stylesheet" />
+    <link type="text/css" href="{% static "css/jquery-ui.theme.min.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "js/jquery-ui.min.js" %}"></script>
+
+    <script type="text/javascript">
+    $(function(){
+        $('.datepicker').datepicker();
+    });
+    </script>
+{% endblock %}
+
+{% block main_content %}
+<div class="arriv">
+<div class="container">
+    <div style="text-align: center; color: green">{{ success_message }}</div>
+    <div style="text-align: center; color: red">{{ error_message }}</div>
+    <div class="main">
+        <div class="col-md-6">
+        <h3>
+            ورود به سایت
+        </h3>
+        <form method="post" action="/login/">
+            {% csrf_token %}
+            {{ login_form.as_table }}
+            <div>
+            <button type="submit" class="btn btn-primary" name="login">
+                ورود
+            </button>
+            </div>
+        </form>
+        </div>
+        <div class="col-md-6">
+        <h3>
+            ثبت‌نام
+        </h3>
+        <form method="post" action="/sign-up/">
+            {% csrf_token %}
+            {{ user_form.as_table }}
+            {{ userprofile_form.as_table }}
+            <div>
+            <button type="submit" class="btn btn-primary" name="signup">
+                ارسال
+            </button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

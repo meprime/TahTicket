@@ -5,8 +5,9 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^management/$', 'Ticket.views.admin'),
     url(r'^$', 'Ticket.views.index'),
-    url(r'^login/$', 'Ticket.views.sign_in'),
-    url(r'^logout/$', 'Ticket.views.sign_out'),
+    url(r'^sign-up/$', 'User.views.sign_up'),
+    url(r'^login/$', 'User.views.sign_in'),
+    url(r'^logout/$', 'User.views.sign_out'),
     url(r'^contact/$', 'Ticket.views.contact_us'),
     url(r'^admin-event/(?P<event_id>[a-zA-Z0-9]*)/$', 'Event.views.admin_event'),  # LATER COULD BE MERGED WITH EVENT
     url(r'^new-event/', 'Event.views.new_event'),
