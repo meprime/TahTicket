@@ -1,6 +1,12 @@
 from django.db import models
-from Event.models import Event
+from Event.models import Event, Ticket
 from User.models import UserProfile
+
+
+class VisitorCartItem(models.Model):
+    session_id = models.UUIDField()
+    ticket = models.ForeignKey(Ticket)
+    count = models.IntegerField(default=0)  # determines the count of ordered tickets
 
 
 class Comment(models.Model):

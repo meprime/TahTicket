@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
-
 from User.models import UserProfile
 
 
@@ -23,7 +22,7 @@ class Type(models.Model):
 
 
 class SubType(models.Model):
-    name = models.CharField(max_length=40, unique=True)
+    name = models.CharField(max_length=40)
     type = models.ForeignKey(Type)
 
     def __str__(self):
@@ -33,8 +32,8 @@ class SubType(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
-    date = models.DateField(default=now().date())
-    time = models.TimeField(default=now().time())
+    date = models.DateField(now().date())
+    time = models.TimeField(now().time())
     # img =
     venue = models.ForeignKey(Venue)
     type = models.ForeignKey(Type)
