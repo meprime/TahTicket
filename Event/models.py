@@ -34,7 +34,7 @@ class Event(models.Model):
     title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
     date = models.DateField(default=date.today, blank=True)
-    time = models.TimeField(auto_now_add=True, blank=True)
+    time = models.TimeField(default=now().time(), blank=True)
     venue = models.ForeignKey(Venue)
     type = models.ForeignKey(Type)
     sub_type = models.ForeignKey(SubType)
