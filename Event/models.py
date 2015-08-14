@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
+from datetime import date, time, datetime
 from User.models import UserProfile
 
 
@@ -32,13 +33,13 @@ class SubType(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
-    date = models.DateField(now().date())
-    time = models.TimeField(now().time())
-    # img =
+    date = models.DateField(default=date.today, blank=True)
+    time = models.TimeField(auto_now_add=True, blank=True)
     venue = models.ForeignKey(Venue)
     type = models.ForeignKey(Type)
     sub_type = models.ForeignKey(SubType)
-    # organizer = models.ForeignKey(EventOrganizer)  ### APPARENTLY NOT REQUIRED
+    num_of_raters = models.IntegerField(default=0)
+    rate_sum = models.IntegerField(default=0)
 
     '''
     def clean(self):
@@ -62,6 +63,7 @@ class Ticket(models.Model):
 class BoughtTicket(models.Model):
     ticket = models.ForeignKey(Ticket)
     buyer = models.ForeignKey(UserProfile)
+    date = models.DateField(default=date.today, blank=True)
     serial_no = models.BigIntegerField(null=True, blank=True)
 
 

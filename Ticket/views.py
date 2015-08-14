@@ -48,10 +48,6 @@ def contact_us(request):
     return render(request, 'contact.html', {'login_form': LoginForm()})
 
 
-def user_tickets(request):
-    return render(request, 'user_tickets.html', {'login_form': LoginForm()})
-
-
 @admin_login_required(login_url='/')
 def admin_all_events(request):
     all_events = Event.objects.all()

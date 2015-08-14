@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from Ticket.forms import *
 from User.models import *
+from Event.models import BoughtTicket
+from Ticket.decorators import user_login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponseForbidden
+
 
 def sign_in(request):
     if request.method == 'POST':
@@ -53,8 +56,26 @@ def sign_up(request):
     })
 
 
+@user_login_required(login_url='/')
 def user_profile(request):
-    user_update_form = UserUpdateForm
+    user = request.user
+    user_update_form = UserUpdateForm(
+        initial={
+            'nl_memb': user.userprofile.nl_memb,
+        }
+    )
+    if request.method == 'POST':
+        pass
     return render(request, 'user_profile.html', {
         'user_update_form': user_update_form,
+        'userprofile': user.userprofile,
+    })
+
+
+@user_login_required(login_url='/')
+def user_tickets(request):
+    user = request.user
+    return render(request, 'user_tickets.html', {
+        'bought_tickets': BoughtTicket.objects.filter(buyer=user.userprofile),
+        'login_form': LoginForm()
     })

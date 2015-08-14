@@ -24,15 +24,22 @@
             <th>نوع بلیت</th>
             </thead>
             <tbody>
-            <tr class="clickable-row" data-href="/ticket">
-                <td>فوتبال</td> <td>۱۱/۱۱/۲۰۱۵</td> <td>۱۱/۱۰/۲۰۱۵</td> <td>درجه‌ی یک</td>
-            </tr>
-            <tr class="clickable-row" data-href="/ticket">
-                <td>فیلم</td> <td>۱۱/۱۱/۲۰۱۵</td> <td>۱۱/۱۰/۲۰۱۵</td> <td>درجه‌ی دو</td>
-            </tr>
-            <tr class="clickable-row" data-href="/ticket">
-                <td>کنسرت</td> <td>۱۱/۱۱/۲۰۱۵</td> <td>۱۱/۱۰/۲۰۱۵</td> <td>درجه‌ی یک</td>
-            </tr>
+            {% for bt in bought_tickets %}
+                <tr class="clickable-row" data-href="/ticket">
+                <td>
+                    {{ bt.ticket.event.title }}
+                </td>
+                <td>
+                    {{ bt.ticket.event.date }}
+                </td>
+                <td>
+                    {{ bt.date }}
+                </td>
+                <td>
+                    {{ bt.ticket.type }}
+                </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
