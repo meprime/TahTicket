@@ -16,10 +16,11 @@
                             {% for event in top_events %}
                                 {% with forloop.counter|stringformat:"s" as id %}
                             <li><a href="/event/{{ event.id }}">
-                                <img src="{% static 'data0/images/'|add:id|add:'.jpg' %}"
-                                                            title="{{ event.name }}"
+                                <img src="{% static 'images/events/'|add:id|add:'.jpg' %}"
+                                                            title="{{ event.title }}"
                                                             id="wows0_{{ id }}"/>
-                            </a></li>
+                            </a>
+                            </li>
                                 {% endwith %}
                             {% endfor %}
                         </ul>
@@ -29,8 +30,7 @@
                             {% for event in top_events %}
                                 {% with forloop.counter|stringformat:"s" as id %}
 
-                            <a href="/event/{{ event.id }}" title="{{ event.name }}"><span><img
-                                    src="{% static 'data0/tooltips/'|add:id|add:'.jpg' %}"/>{{ id }}</span></a>
+                            <a href="/event/{{ event.id }}" title="{{ event.name }}"><span></span></a>
                                 {% endwith %}
                             {% endfor %}
                         </div>
