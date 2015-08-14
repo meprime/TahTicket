@@ -36,10 +36,8 @@ class Event(models.Model):
     date = models.DateField(default=date.today, blank=True)
     time = models.TimeField(default=now().time(), blank=True)
     venue = models.ForeignKey(Venue)
-    type = models.ForeignKey(Type)
     sub_type = models.ForeignKey(SubType)
-    num_of_raters = models.IntegerField(default=0)
-    rate_sum = models.IntegerField(default=0)
+    rate = models.ManyToManyField(UserProfile, through="TicketRate")
 
     '''
     def clean(self):
@@ -50,6 +48,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TicketRate(models.Model):
+    user = models.ForeignKey(UserProfile)
+    event = models.ForeignKey(Event)
+    rate = models.IntegerField(default=0)
 
 
 class Ticket(models.Model):

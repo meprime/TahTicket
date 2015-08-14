@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 import datetime
 from Event.models import *
@@ -177,7 +177,11 @@ def forgot_password(request):
 
 
 def event_view(request, event_id):
-    return render(request, 'details.html', {'login_form': LoginForm()})
+    event = get_object_or_404(Event, pk=event_id)
+    return render(request, 'details.html', {
+        'login_form': LoginForm(),
+        'event': event
+    })
 
 
 def test_view(request):
