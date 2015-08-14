@@ -24,7 +24,6 @@ def index(request):
     for i in range(0, 4):
         if events.__len__() >= i:
             new_events.append(events[i])
-            print(events[i].title)
 
     tickets = Ticket.objects.all().order_by("-sold")
     top_events = []
