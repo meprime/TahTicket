@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 class NewEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['organizer', 'type']
+        exclude = ['organizer', 'type', 'rate']
 
         labels = {
             'title': _('عنوان'),
@@ -119,7 +119,16 @@ class CustomerRegistrationForm(forms.ModelForm):
 class UserUpdateForm(forms.Form):
     password = forms.CharField(max_length=50, widget=forms.PasswordInput(), required=True, label='رمز عبور جدید')
     confirm_password = forms.CharField(max_length=50, widget=forms.PasswordInput(), required=True, label='تأیید رمز عبور')
-    nl_memb = forms.BooleanField(label='عضویت در خبرنامه')  #newsletter membership
+    nl_memb = forms.BooleanField(required=False, label='عضویت در خبرنامه')  #newsletter membership
+
+    def clean(self):
+        cleaned_data = super(UserUpdateForm, self).clean()
+
+        pw1 = cleaned_data.get("password")
+        pw2 = cleaned_data.get("confirm_password")
+        if pw1 != pw2:
+            raise ValidationError("تأییدیه‌ی رمز عبورتان اشتباه است!", code="password_confirmation_error")
+        return cleaned_data
 
 
 class TypeForm(forms.ModelForm):

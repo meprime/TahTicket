@@ -76,7 +76,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 {% if user.is_authenticated %}
                     {% block logout_btn %}
                         <li>
-                            <a id="login_text" class="btn btn-ticket" style="color: #ffffff;padding: 5px;" href="/logout/">
+                            <a id="profile_text" class="btn btn-ticket" style="color: #ffffff;padding: 5px;" href="/user-profile/">
+                                <i class="fa fa-user"></i>
+پروفایل کاربری
+                            </a>
+                        </li>
+                        <li>
+                            <a id="logout_text" class="btn btn-ticket" style="color: #ffffff;padding: 5px;" href="/logout/">
                                 <i class="fa fa-close"></i>
 خروج
                             </a>

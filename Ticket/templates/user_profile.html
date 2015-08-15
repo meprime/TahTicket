@@ -32,9 +32,17 @@
                 </dd>
             </dl>
             <div>
+                <div style="text-align: center; color: green">{{ success_message }}</div>
                 <form method="post">
                     {% csrf_token %}
-                    {{ user_update_form.as_table }}
+                    <div class="error-message">{{ user_update_form.non_field_errors }}</div>
+                    {% for field in user_update_form %}
+                        <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                        </div>
+                    {% endfor %}
                     <div>
                     <button type="submit" class="btn btn-primary">
     ثبت تغییرات

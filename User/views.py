@@ -59,6 +59,7 @@ def sign_up(request):
 @user_login_required(login_url='/')
 def user_profile(request):
     user = request.user
+    success_msg = ''
     user_update_form = UserUpdateForm(
         initial={
             'nl_memb': user.userprofile.nl_memb,
@@ -71,9 +72,11 @@ def user_profile(request):
             user.save()
             user.userprofile.nl_memb = user_update_form.cleaned_data['nl_memb']
             user.userprofile.save()
+            success_msg = 'تغییرات با موفقیت انجام شد'
     return render(request, 'user_profile.html', {
         'user_update_form': user_update_form,
         'userprofile': user.userprofile,
+        'success_message': success_msg,
     })
 
 

@@ -5,8 +5,10 @@ input {
     border-radius: 4px;
 }
 
-option, select, textarea {
+input, option, select, textarea {
     color: #00405d;
+    width: 40%;
+    border-radius: 4px;
 }
 
 .error-message {
