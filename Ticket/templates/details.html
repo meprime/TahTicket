@@ -65,73 +65,54 @@
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
-                                <form>
-                                    <div class="desc1 span_3_of_2 pull-left">
-                                        {% if user.is_authenticated %}
-                                            <input type="number" name="your_awesome_parameter" id="some_id"
-                                                   class="rating"
-                                                   data-clearable="حذف" data-icon-lib="fa" data-active-icon="fa-heart"
-                                                   data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o"/>
-                                        {% endif %}
+                                <div class="desc1 span_3_of_2 pull-left">
+                                    {% if user.is_authenticated %}
+                                        <div id="rating_avg">{{ event.get_rate_avg }}</div>
+                                        <input type="number" name="rating" id="id_rating"
+                                               class="rating"
+                                               data-clearable="حذف" data-icon-lib="fa" data-active-icon="fa-heart"
+                                               data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o"/>
+                                    {% endif %}
 
-                                        <h3 style="color: skyblue!important;">
-                                            {{ event.title }}
-                                        </h3>
-                                        <span class="code">نوع بازی: لالیگا</span>
+                                    <h3 style="color: skyblue!important;">
+                                        {{ event.title }}
+                                    </h3>
+                                        <span class="code">
+                                            {{ event.venue }}
+                                        </span>
 
-                                        <p style="color: #f5f5f5!important;">
-                                            {{ event.description }}
-                                        </p>
+                                    <p style="color: #f5f5f5!important;">
+                                        {{ event.description }}
+                                    </p>
+                                    <br>
 
-                                        <div class="price">
-                                            <span class="text">قیمت:</span>
-                                            <span class="price-old">499999﷼</span><span class="price-new">449999﷼</span>
-                                            <br>
-                                            <span class="text">تعداد:</span>
-                                            <input class="input-small" type="number" value="1" style="color: #000000">
-                                            <br>
-                                        </div>
-                                        <div class="det_nav1">
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <span class="text">محل نشستن :</span>
-
-                                            <div class=" sky-form col col-4" style="margin-top: 0;">
-                                                <ul>
-                                                    <li><label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox"><i></i>شرقی</label>
-                                                    </li>
-                                                    <li><label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox"><i></i>غربی</label>
-                                                    </li>
-                                                    <li><label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox"><i></i>شمالی</label>
-                                                    </li>
-                                                    <li><label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox"><i></i>جنوبی</label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                    <form>
+                                        <ul>
+                                            {% for ticket in event.ticket_set.all %}
+                                                <li>
+                                                    <h3 style="color: whitesmoke">{{ ticket.type }}</h3>
+                                                    <span class="text">قیمت:</span>
+                                                    <span class="price-new">{{ ticket.price }}﷼</span>
+                                                    <br>
+                                                    <span class="text">تعداد:</span>
+                                                    <input class="input-small" type="number" value="0"
+                                                           name="ticket_num_{{ ticket.id }}"
+                                                           style="color: #000000">
+                                                    <br>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
                                         <div class="btn_form">
-                                            <button type="submit">خرید</button>
-                                        <span class="fa fa-star-o" data-rating="1" id="favorite-star"
-                                              title="افزودن به علاقه مندی ها"></span>
+                                            <button type="submit" class="btn btn-success">خرید</button>
+                                            {% if user.is_authenticated %}
+                                                <span class="fa {% if event in user.userprofile.favorites.all %}fa-star filled-star{% else %}fa-star-o{% endif %}"
+                                                      data-rating="1" id="favorite-star"
+                                                      title="افزودن به علاقه مندی ها"></span>
+                                            {% endif %}
                                         </div>
-
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                                 <div class="clearfix"></div>
-                            </div>
-                            <div class="single-bottom1">
-                                <h6>جزئیات</h6>
-
-                                <p class="prod-desc" style="color: #f5f5f5!important;">
-                                    بنیتز اعلام کرد: طبق توافقات بین باشگاه بارسا و ورزشگاه برنابئو، پس از برگزاری یک
-                                    دوره ی
-                                    تمرینی 6 ماهه در این ورزشگاه، این تیم بی صبرانه منتظر رویارویی با تیم رئال است.
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -150,18 +131,40 @@
     <script src="../static/js/main.js"></script>
     <script>
         $('#favorite-star').on('click', function () {
-            if ($(this).hasClass('fa-star-o')) {
-                $(this).removeClass('fa-star-o');
-                $(this).addClass('fa-star filled-star');
-                $(this).attr('title', 'حذف از لیست علاقه مندی ها');
-                alert('با موفقیت به لیست علاقه مندی ها اضافه شد');
-            } else {
-                $(this).removeClass('fa-star filled-star');
-                $(this).addClass('fa-star-o');
-                $(this).attr('title', 'افزودن به لیست علاقه مندی ها');
-                alert('با موفقیت از لیست علاقه مندی ها حذف گردید.')
-            }
+            fav_btn = $(this);
+            $.ajax({
+                url: "/favorite/" + {{ event.id }},
+                success: function (result) {
+                    if (fav_btn.hasClass('fa-star-o')) {
+                        fav_btn.removeClass('fa-star-o');
+                        fav_btn.addClass('fa-star filled-star');
+                        fav_btn.attr('title', 'حذف از لیست علاقه مندی ها');
+                        alert('با موفقیت به لیست علاقه مندی ها اضافه شد');
+                    } else {
+                        fav_btn.removeClass('fa-star filled-star');
+                        fav_btn.addClass('fa-star-o');
+                        fav_btn.attr('title', 'افزودن به لیست علاقه مندی ها');
+                        alert('با موفقیت از لیست علاقه مندی ها حذف گردید.')
+                    }
+                }
+            });
         });
+        var event_id = {{ event.id }};
+        $(document).ready(function () {
+            $("###rating-input").on("click", function () {
+                rate_btn = $(this);
+                $.ajax({
+                    url: "/rate/" + event_id,
+                    data: {
+                        value: rate_btn.attr('data-value')
+                    },
+                    success: function (result) {
+                        alert("رای شما با موفقیت ثبت شد.");
+                    }
+                });
+            });
+        });
+        debugger
     </script>
 
 {% endblock %}

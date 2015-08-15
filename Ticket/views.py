@@ -1,12 +1,12 @@
+import json
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse
+
 from django.shortcuts import render, get_object_or_404
 
-import datetime
 from Event.models import *
-from User.models import *
 from Ticket.decorators import admin_login_required
-from Ticket.forms import ForgotPasswordForm, LoginForm, DateForm, UserProfileRegistrationForm, UserRegistrationForm
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from Ticket.forms import ForgotPasswordForm, LoginForm, DateForm
 
 
 @admin_login_required(login_url='/')
@@ -97,7 +97,6 @@ def search(request):
     t_val = 0
 
     if stype is not None and stype != "0-0":
-        print("TYPE" + stype)
         tmp = stype.split("-")
         t_val = int(tmp[0])
         if tmp[1] != "0":
@@ -114,8 +113,6 @@ def search(request):
         prices = price.split("%2C")
         low_price = prices[0]
         high_price = prices[1]
-        print(low_price)
-        print(high_price)
 
     if query is not None and query != "":
         result = process_query_users(query, result)
@@ -128,7 +125,6 @@ def search(request):
 
     types = Type.objects.all()
     subtypes = SubType.objects.all()
-    print(subtypes)
 
     return render(request, 'shop.html', {
         "empty": empty,
@@ -146,12 +142,9 @@ def process_query_users(query, result):
     results = []
     temp = query.split('+')
     terms = []
-    print(temp)
     for term in temp:
-        print(term + "1")
         terms += term.split(' ')
     for term in terms:
-        print(term)
         results += result.filter(title__contains=term)
     return results
 
@@ -184,6 +177,26 @@ def event_view(request, event_id):
     })
 
 
+@login_required
+def add_to_favorites(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if event not in request.user.userprofile.favorites.all():
+        request.user.userprofile.favorites.add(event)
+    else:
+        request.user.userprofile.favorites.remove(event)
+    return JsonResponse({})
+
+
+@login_required
+def rate(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    rate_obj = TicketRate.objects.get_or_create(user=request.user.userprofile, event=event)
+    print(request.GET.get('value'))
+    rate_obj.value = request.GET.get('value')
+    rate_obj.save()
+    return JsonResponse({})
+
+
 def test_view(request):
     return render(request, 'Type.html', {'login_form': LoginForm()})
 
@@ -194,8 +207,6 @@ def type_view(request, type_id):
     c_type = Type.objects.filter(id=type_id)[0]
     events = Event.objects.filter(type=c_type)
     c_subtypes = SubType.objects.filter(type=c_type)
-    print(c_type)
-    print(events)
     empty = 0
     if events.__len__() == 0:
         empty = 1

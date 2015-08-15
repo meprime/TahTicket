@@ -39,6 +39,7 @@ class Event(models.Model):
     type = models.ForeignKey(Type, default=1)
     sub_type = models.ForeignKey(SubType)
     rate = models.ManyToManyField(UserProfile, through="TicketRate")
+    favorites = models.ManyToManyField(UserProfile, related_name="favorites")
 
     '''
     def clean(self):
