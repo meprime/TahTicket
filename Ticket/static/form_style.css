@@ -1,8 +1,20 @@
 input {
     /*background-color: #7A8499;*/
     color: #00405d;
+    width: 40%;
+    border-radius: 4px;
 }
 
 option, select, textarea {
     color: #00405d;
+}
+
+.error-message {
+    text-align: center;
+    color: red !important;
+}
+
+.success-message {
+    text-align: center;
+    color: green !important;
 }

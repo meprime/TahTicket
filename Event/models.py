@@ -36,6 +36,7 @@ class Event(models.Model):
     date = models.DateField(default=date.today, blank=True)
     time = models.TimeField(default=now().time(), blank=True)
     venue = models.ForeignKey(Venue)
+    type = models.ForeignKey(Type, default=1)
     sub_type = models.ForeignKey(SubType)
     rate = models.ManyToManyField(UserProfile, through="TicketRate")
 

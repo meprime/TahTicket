@@ -4,6 +4,7 @@ from django.forms import Textarea
 from Ticket.models import ContactMessage
 from django.contrib.auth.models import User
 from User.models import UserProfile
+from django.core.exceptions import ValidationError
 from Event.models import Event, Venue, Ticket, Type, SubType
 from django.utils.translation import ugettext_lazy as _
 
@@ -67,9 +68,10 @@ class NewTicketTypeForm(forms.ModelForm):
 
 class UserRegistrationForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label='تأیید رمز عبور')
+
     class Meta:
         model = User
-        fields = ['username', 'password', 'email']
+        fields = ['username', 'email', 'password']
         labels = {
             'username': _('نام کاربری'),
             'password': _('رمز عبور'),
@@ -79,13 +81,24 @@ class UserRegistrationForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
+    def clean(self):
+        cleaned_data = super(UserRegistrationForm, self).clean()
+
+        pw1 = cleaned_data.get("password")
+        pw2 = cleaned_data.get("confirm_password")
+        if pw1 != pw2:
+            raise ValidationError("تأییدیه‌ی رمز عبورتان اشتباه است!", code="password_confirmation_error")
+        return cleaned_data
+
+
+
 
 class UserProfileRegistrationForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['gender', 'phone_no']
         labels = {
-            'gender': _(''),
+            'gender': _('جنسیت'),
             'phone_no': _('شماره‌ی تماس'),
         }
         widgets = {

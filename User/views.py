@@ -65,7 +65,12 @@ def user_profile(request):
         }
     )
     if request.method == 'POST':
-        pass
+        user_update_form = UserUpdateForm(request.POST)
+        if user_update_form.is_valid():
+            user.set_password(user_update_form.cleaned_data['password'])
+            user.save()
+            user.userprofile.nl_memb = user_update_form.cleaned_data['nl_memb']
+            user.userprofile.save()
     return render(request, 'user_profile.html', {
         'user_update_form': user_update_form,
         'userprofile': user.userprofile,
