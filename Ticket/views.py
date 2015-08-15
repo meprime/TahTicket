@@ -150,7 +150,11 @@ def process_query_users(query, result):
 
 
 def checkout(request):
-    return render(request, 'checkout.html', {'login_form': LoginForm()})
+    buy_sum = 0
+    for item in request.user.userprofile.boughtticket_set.all():
+        buy_sum += item.ticket.price
+    return render(request, 'checkout.html', {'login_form': LoginForm(),
+                                             'buy_sum': buy_sum})
 
 
 def bank(request):
