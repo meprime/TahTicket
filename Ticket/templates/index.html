@@ -14,7 +14,7 @@
                     <div class="ws_images" dir="ltr">
                         <ul>
                             {% for event in top_events %}
-                                {% with forloop.counter|stringformat:"s" as id %}
+                                {% with event.id|stringformat:"s" as id %}
                             <li><a href="/event/{{ event.id }}">
                                 <img src="{% static 'images/events/'|add:id|add:'.jpg' %}"
                                                             title="{{ event.title }}"
