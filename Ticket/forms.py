@@ -58,7 +58,7 @@ class NewVenueForm(forms.ModelForm):
 class NewTicketTypeForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        exclude = ['event', 'sold']
+        exclude = ['event']
         labels = {
             'type': _('نوع'),
             'capacity': _('ظرفیت'),

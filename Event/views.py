@@ -2,6 +2,7 @@
 import os
 from django.shortcuts import render
 from Ticket.forms import *
+from Event.models import BoughtTicket
 from Ticket.decorators import admin_login_required
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
@@ -41,7 +42,7 @@ def admin_event(request, event_id):
         tickets.append({
             'type': tt.type,
             'capacity': tt.capacity,
-            'sold': tt.sold,
+            'sold': BoughtTicket.objects.filter(ticket=tt).count(),
         })
 
     return render(request, 'organizer_event.html', {

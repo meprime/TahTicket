@@ -47,6 +47,20 @@ class Event(models.Model):
         if SubType.objects.get(id=self.sub_type).type_id != self.type:
             raise ValidationError('sub_type should actually be a sub-type of type!')
     '''
+    def __lt__(self, other):
+        self_rates = TicketRate.objects.filter(event=self)
+        other_rates = TicketRate.objects.filter(event=other)
+        if self_rates.__len__() == 0:
+            return True
+        elif other_rates.__len__() == 0:
+            return False
+        else:
+            self_avg = sum(r.rate for r in self_rates) / self_rates.count()
+            other_avg = sum(r.rate for r in other_rates) / other_rates.count()
+            if self_avg <= other_avg:
+                return True
+            else:
+                return False
 
     def __str__(self):
         return self.title
@@ -62,7 +76,6 @@ class Ticket(models.Model):
     event = models.ForeignKey(Event)
     type = models.CharField(max_length=20)
     capacity = models.IntegerField(default=0)
-    sold = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
 
 
