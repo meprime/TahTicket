@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-
 from django.shortcuts import render, get_object_or_404
 
 from Event.models import *
@@ -157,7 +156,7 @@ def checkout(request):
     count = BoughtTicket.objects.filter(buyer=request.user.userprofile, payed=False).count()
     return render(request, 'checkout.html', {'login_form': LoginForm(),
                                              'buy_sum': buy_sum,
-                                             'count':count})
+                                             'count': count})
 
 
 def bank(request):
@@ -167,10 +166,12 @@ def bank(request):
 def code(request):
     user = request.user.userprofile
     tickets = BoughtTicket.objects.filter(buyer=user)
+    p = Payment.objects.create()
     for tick in tickets:
         tick.payed = True
+        tick.payment = p
         tick.save()
-    return render(request, 'code.html', {'login_form': LoginForm()})
+    return render(request, 'code.html', {'login_form': LoginForm(), 'payment': p})
 
 
 def event_view(request, event_id):
@@ -249,14 +250,10 @@ def type_type_view(request, type_id, subtype_id):
 def buy_view(request, event_id):
     count = request.POST['count']
     ticket_id = request.POST['ticket_id']
+    print('============================')
+    print(count)
+    print(ticket_id)
+    print('============================')
     ticket = get_object_or_404(Ticket, id=ticket_id)
-    # try:
-    #     like = like_set.likes.get(member=member)
-    # except ObjectDoesNotExist:
-    #     like = Like.objects.create(manager=like_set, member=member)
-    print('============================================')
-    # print(ticket)
-    # print(ticket_id)
-    # print(request.user.userprofile)
     BoughtTicket.objects.create(ticket=ticket, buyer=request.user.userprofile, count=count)
     return JsonResponse({}, status=200)
