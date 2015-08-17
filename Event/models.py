@@ -1,7 +1,8 @@
+from datetime import date
+
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.utils.timezone import now
-from datetime import date, time, datetime
+
 from User.models import UserProfile
 
 
@@ -80,5 +81,3 @@ class BoughtTicket(models.Model):
     serial_no = models.BigIntegerField(null=True, blank=True)
     count = models.IntegerField(default=1)
     payed = models.BooleanField(default=False)
-
-

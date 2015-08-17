@@ -18,15 +18,21 @@
 
                         <div class="price-details">
                             {% for item in user.userprofile.boughtticket_set.all %}
-                            <span class="total1" style="color: white!important;">{{ item.ticket.price }}</span>
+                                {% if not item.payed %}
+                                    <span class="total1"
+                                          style="color: white!important;">{{ item.ticket.price }}</span>
+                                    <span class="total1"
+                                          style="color: white!important;">{{ item.count }}</span>
 
-                            <h3 style="color: white!important;">{{ item.ticket.event.title }}</h3>
+                                    <h3 style="color: white!important;">{{ item.ticket.event.title }}</h3>
 
-                            <div class="clearfix"></div>
+                                    <div class="clearfix"></div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                         <ul class="total_price">
-                            <li class="last_price"><span style="color: #357ebd!important;">{{ buy_sum }}</span></li>
+                            <li class="last_price"><span
+                                    style="color: #357ebd!important;">{{ buy_sum }}</span></li>
                             <li class="last_price"><h4>مجموع</h4></li>
 
                             <div class="clearfix"></div>
@@ -39,44 +45,50 @@
                     </div>
                     <div class="col-md-9 cart-items">
                         <h1>سبد خرد من (
-                            {{ user.userprofile.boughtticket_set.count }}
+                            {{ count }}
                             مورد)</h1>
                         {% for item in user.userprofile.boughtticket_set.all %}
-                            <script>$(document).ready(function (c) {
-                                $('.close{{ forloop.counter }}').on('click', function (c) {
-                                    $('.cart-header{{ forloop.counter }}').fadeOut('slow', function (c) {
-                                        $('.cart-header{{ forloop.counter }}').remove();
+                            {% if not item.payed %}
+
+                                <script>$(document).ready(function (c) {
+                                    $('.close{{ forloop.counter }}').on('click', function (c) {
+                                        $('.cart-header{{ forloop.counter }}').fadeOut('slow', function (c) {
+                                            $('.cart-header{{ forloop.counter }}').remove();
+                                        });
                                     });
                                 });
-                            });
-                            </script>
-                            <div class="cart-header cart-header{{ forloop.counter }}">
-                                <div class="close1"></div>
-                                <div class="cart-sec simpleCart_shelfItem">
+                                </script>
+                                <div class="cart-header cart-header{{ forloop.counter }}">
+                                    <div class="close1"></div>
+                                    <div class="cart-sec simpleCart_shelfItem">
 
-                                    <div class="cart-item-info" style="padding: 15px">
-                                        <h1><a href="/event/{{ item.ticket.event.id }}">{{ item.ticket.event.title }}</a></h1>
+                                        <div class="cart-item-info" style="padding: 15px">
+                                            <h1>
+                                                <a href="/event/{{ item.ticket.event.id }}">{{ item.ticket.event.title }}</a>
+                                            </h1>
 
-                                        <h3>{{ item.ticket.event.type }}</h3>
+                                            <h3>{{ item.ticket.event.type }}</h3>
 
-                                        <div class="">
-                                            <p>قیمت :
-                                                {{ item.ticket.price }}
-                                                ﷼</p>
+                                            <div class="">
+                                                <p>قیمت :
+                                                    {{ item.ticket.price }}
+                                                    ﷼</p>
 
-                                            <p>{{ item.ticket.type }}</p>
-                                            <span></span>
+                                                <p>{{ item.ticket.type }}</p>
+                                                <span></span>
 
-                                            <div class="clearfix"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="cart-item cyc">
-                                        <img src="/static/images/events/{{ item.ticket.event.id }}.jpg" class="img-responsive" alt=""/>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                        <div class="cart-item cyc">
+                                            <img src="/static/images/events/{{ item.ticket.event.id }}.jpg"
+                                                 class="img-responsive" alt=""/>
+                                        </div>
+                                        <div class="clearfix"></div>
 
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         {% endfor %}
 
                     </div>
