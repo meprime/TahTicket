@@ -17,8 +17,24 @@
                 source_image_height: 1200
             });
 
-            $('.btn-success').click(function (){
-                
+            $('.btn-success').click(function () {
+                var val = $('[name^="ticket_num_"]').val();
+                $.ajax({
+                    url: "buy/" +{{ event_id }},
+                    method: 'POST',
+                    data: {
+                            csrfmiddlewaretoken:"{{ csrf_token }}" ,
+                            count:val
+                            },
+                    success: function (response) {
+                        alert('')
+                    },
+                    error: function (xhr) {
+                        alert('متاسفانه امکان خرید در حال حاضر وجود ندارد... لطفا بعدا تلاش کنید');
+                    }
+                });
+                return false;
+                {#                delay(2000);#}
             });
 
 
@@ -75,8 +91,10 @@
                                         <div id="rating_avg">{{ event.get_rate_avg }}</div>
                                         <input type="number" name="rating" id="id_rating"
                                                class="rating"
-                                               data-clearable="حذف" data-icon-lib="fa" data-active-icon="fa-heart"
-                                               data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o"/>
+                                               data-clearable="حذف" data-icon-lib="fa"
+                                               data-active-icon="fa-heart"
+                                               data-inactive-icon="fa-heart-o"
+                                               data-clearable-icon="fa-trash-o"/>
                                     {% endif %}
 
                                     <h3 style="color: skyblue!important;">
@@ -100,7 +118,8 @@
                                                     <span class="price-new">{{ ticket.price }}﷼</span>
                                                     <br>
                                                     <span class="text">تعداد:</span>
-                                                    <input class="input-small" type="number" value="0"
+                                                    <input class="input-small" type="number"
+                                                           value="0"
                                                            name="ticket_num_{{ ticket.id }}"
                                                            style="color: #000000">
                                                     <br>
@@ -108,7 +127,8 @@
                                             {% endfor %}
                                         </ul>
                                         <div class="btn_form">
-                                            <button type="submit" class="btn btn-success">خرید</button>
+                                            <button type="submit" class="btn btn-success">خرید
+                                            </button>
                                             {% if user.is_authenticated %}
                                                 <span class="fa {% if event in user.userprofile.favorites.all %}fa-star filled-star{% else %}fa-star-o{% endif %}"
                                                       data-rating="1" id="favorite-star"

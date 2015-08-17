@@ -1,12 +1,11 @@
-import json
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 from django.shortcuts import render, get_object_or_404
 
 from Event.models import *
 from Ticket.decorators import admin_login_required
-from Ticket.forms import ForgotPasswordForm, LoginForm, DateForm
+from Ticket.forms import LoginForm, DateForm
 
 
 @admin_login_required(login_url='/')
@@ -170,7 +169,8 @@ def event_view(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     return render(request, 'details.html', {
         'login_form': LoginForm(),
-        'event': event
+        'event': event,
+        'event_id': event_id,
     })
 
 
@@ -236,3 +236,15 @@ def type_type_view(request, type_id, subtype_id):
         "events": events,
         'login_form': LoginForm()
     })
+
+
+def buy_view(request, event_id):
+    count = request.POST['count']
+    # try:
+    #     like = like_set.likes.get(member=member)
+    # except ObjectDoesNotExist:
+    #     like = Like.objects.create(manager=like_set, member=member)
+    print('============================================')
+    print(count)
+    print('============================================')
+    return JsonResponse({}, status=200)

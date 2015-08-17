@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^fake_bank$', 'Ticket.views.bank'),
     url(r'^code$', 'Ticket.views.code'),
     url(r'^event/(?P<event_id>\d+)$', 'Ticket.views.event_view'),
+    url(r'buy/(?P<event_id>\d+)$', 'Ticket.views.buy_view'),
     url(r'^favorite/(?P<event_id>\d+)$', 'Ticket.views.add_to_favorites'),
     url(r'^rate/(?P<event_id>\d+)$', 'Ticket.views.rate'),
     url(r'^forgot-password/', 'User.views.forgot_password'),
