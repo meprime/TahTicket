@@ -78,5 +78,7 @@ class BoughtTicket(models.Model):
     buyer = models.ForeignKey(UserProfile)
     date = models.DateField(default=date.today, blank=True)
     serial_no = models.BigIntegerField(null=True, blank=True)
+    count = models.IntegerField(default=1)
+    payed = models.BooleanField(default=False)
 
 

@@ -240,11 +240,15 @@ def type_type_view(request, type_id, subtype_id):
 
 def buy_view(request, event_id):
     count = request.POST['count']
+    ticket_id = request.POST['ticket_id']
+    ticket = get_object_or_404(Ticket, id=ticket_id)
     # try:
     #     like = like_set.likes.get(member=member)
     # except ObjectDoesNotExist:
     #     like = Like.objects.create(manager=like_set, member=member)
     print('============================================')
-    print(count)
-    print('============================================')
+    # print(ticket)
+    # print(ticket_id)
+    # print(request.user.userprofile)
+    BoughtTicket.objects.create(ticket=ticket, buyer=request.user.userprofile, count=count)
     return JsonResponse({}, status=200)

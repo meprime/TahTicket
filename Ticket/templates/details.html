@@ -19,15 +19,17 @@
 
             $('.btn-success').click(function () {
                 var val = $('[name^="ticket_num_"]').val();
+                var ticket_no = $('[name^="ticket_type_"]').val();
                 $.ajax({
                     url: "buy/" +{{ event_id }},
                     method: 'POST',
                     data: {
                             csrfmiddlewaretoken:"{{ csrf_token }}" ,
-                            count:val
+                            count:val,
+                            ticket_id:ticket_no
                             },
                     success: function (response) {
-                        alert('')
+                        alert('با موفقیت به سبد خرید اضافه شد')
                     },
                     error: function (xhr) {
                         alert('متاسفانه امکان خرید در حال حاضر وجود ندارد... لطفا بعدا تلاش کنید');
@@ -118,6 +120,9 @@
                                                     <span class="price-new">{{ ticket.price }}﷼</span>
                                                     <br>
                                                     <span class="text">تعداد:</span>
+                                                    <input class="hidden"
+                                                           value="{{ ticket.id }}"
+                                                           name="ticket_type_{{ ticket.id }}">
                                                     <input class="input-small" type="number"
                                                            value="0"
                                                            name="ticket_num_{{ ticket.id }}"
