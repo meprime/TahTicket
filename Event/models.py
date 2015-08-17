@@ -1,4 +1,6 @@
 from datetime import date
+import random
+import string
 
 from django.db import models
 from django.utils.timezone import now
@@ -81,3 +83,18 @@ class BoughtTicket(models.Model):
     serial_no = models.BigIntegerField(null=True, blank=True)
     count = models.IntegerField(default=1)
     payed = models.BooleanField(default=False)
+    payment = models.ForeignKey('Payment', null=True, blank=True)
+
+
+def code_generate():
+    while True:
+        prom_code = ''.join(
+            random.choice(string.ascii_uppercase + string.digits) for x in range(6))
+        try:
+            Payment.objects.get(code=prom_code)
+        except:
+            return prom_code
+
+class Payment(models.Model):
+    code = models.CharField(max_length=20, unique=True, default=code_generate)
+

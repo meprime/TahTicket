@@ -18,24 +18,30 @@
             });
 
             $('.btn-success').click(function () {
-                var val = $('[name^="ticket_num_"]').val();
-                var ticket_no = $('[name^="ticket_type_"]').val();
-                $.ajax({
-                    url: "buy/" +{{ event_id }},
-                    method: 'POST',
-                    data: {
-                            csrfmiddlewaretoken:"{{ csrf_token }}" ,
-                            count:val,
-                            ticket_id:ticket_no
-                            },
-                    success: function (response) {
-                        alert('با موفقیت به سبد خرید اضافه شد')
-                    },
-                    error: function (xhr) {
-                        alert('متاسفانه امکان خرید در حال حاضر وجود ندارد... لطفا بعدا تلاش کنید');
-                    }
+                var success = true;
+                $('.tick').each(function () {
+                    var val = $(this).find('[name^="ticket_num_"]').val();
+                    var ticket_no = $(this).find('[name^="ticket_type_"]').val();
+                    $.ajax({
+                        url: "buy/" +{{ event_id }},
+                        method: 'POST',
+                        data: {
+                            csrfmiddlewaretoken: "{{ csrf_token }}",
+                            count: val,
+                            ticket_id: ticket_no
+                        },
+                        success: function (response) {
+                        },
+                        error: function (xhr) {
+                            success = false;
+                        }
+                    });
                 });
-                return false;
+                if (success)
+                    alert('خرید با موفقیت انجام شد');
+                else
+                    alert('در خرید برخی بلیط ها مشکل به وجود آمد. برای خرید آنها مجددا تلاش نمایید.');
+
                 {#                delay(2000);#}
             });
 
@@ -114,12 +120,13 @@
                                     <form>
                                         <ul>
                                             {% for ticket in event.ticket_set.all %}
-                                                <li>
+                                                <li class="tick">
                                                     <h3 style="color: whitesmoke">{{ ticket.type }}</h3>
                                                     <span class="text">قیمت:</span>
                                                     <span class="price-new">{{ ticket.price }}﷼</span>
                                                     <br>
                                                     <span class="text">تعداد:</span>
+
                                                     <input class="hidden"
                                                            value="{{ ticket.id }}"
                                                            name="ticket_type_{{ ticket.id }}">
