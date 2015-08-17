@@ -107,3 +107,10 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'Ticket/templates'),
 )
+
+# SENDING EMAILS
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'popcorn.sadra.saeid@gmail.com'
+EMAIL_HOST_PASSWORD = 'sadrasaeid'
+EMAIL_USE_TLS = True

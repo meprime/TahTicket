@@ -166,14 +166,6 @@ def code(request):
     return render(request, 'code.html', {'login_form': LoginForm()})
 
 
-def forgot_password(request):
-    form = ForgotPasswordForm()
-    return render(request, 'forgot_password.html', {
-        'form': form,
-        'login_form': LoginForm()
-    })
-
-
 def event_view(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     return render(request, 'details.html', {

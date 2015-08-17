@@ -41,12 +41,6 @@ class Event(models.Model):
     rate = models.ManyToManyField(UserProfile, through="TicketRate")
     favorites = models.ManyToManyField(UserProfile, related_name="favorites")
 
-    '''
-    def clean(self):
-        super(self)
-        if SubType.objects.get(id=self.sub_type).type_id != self.type:
-            raise ValidationError('sub_type should actually be a sub-type of type!')
-    '''
     def __lt__(self, other):
         self_rates = TicketRate.objects.filter(event=self)
         other_rates = TicketRate.objects.filter(event=other)

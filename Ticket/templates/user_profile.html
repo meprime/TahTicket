@@ -9,12 +9,15 @@
     <div class="arriv">
     <div class="container">
         <div class="container col-md-6" style="margin-top: 200px">
-            <a class="btn btn-default" href="/my-tickets" role="button">
+            {% if is_admin %}
+            <a class="btn btn-default" href="/management/" role="button">
+صفحه‌ی مدیریت
+            </a>
+            {% else %}
+            <a class="btn btn-default" href="/my-tickets/" role="button">
                 بلیت‌های خریداری‌شده
             </a>
-            <a class="btn btn-default" href="#" role="button">
-    رویدادهای برگزارشده
-            </a>
+            {% endif %}
         </div>
         <div class="container col-md-6">
             <dl>
@@ -22,13 +25,13 @@
         نام کاربری:
                 </dt>
                 <dd>
-                    {{ userprofile.user.username }}
+                    {{ user.username }}
                 </dd>
                 <dt>
                     ایمیل:
                 </dt>
                 <dd>
-                    {{ userprofile.user.email }}
+                    {{ user.email }}
                 </dd>
             </dl>
             <div>
