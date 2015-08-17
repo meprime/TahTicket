@@ -95,7 +95,7 @@ def user_profile(request):
 def user_tickets(request):
     user = request.user
     return render(request, 'user_tickets.html', {
-        'bought_tickets': BoughtTicket.objects.filter(buyer=user.userprofile),
+        'bought_tickets': BoughtTicket.objects.filter(buyer=user.userprofile).filter(payed=True),
         'login_form': LoginForm()
     })
 

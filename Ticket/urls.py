@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^types/', 'Event.views.admin_types'),
     url(r'^remove-type/(?P<type_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_type'),
     url(r'^remove-subtype/(?P<subtype_id>[a-zA-Z0-9]*)/$', 'Event.views.remove_subtype'),
-    url(r'^ticket/', 'Event.views.show_ticket'),
+    url(r'^ticket/(?P<ticket_id>[a-zA-Z0-9]*)/$', 'Event.views.show_ticket'),
     url(r'^all-events/', 'Ticket.views.admin_all_events'),
     url(r'^checkout/', 'Ticket.views.checkout', name='checkout'),
     url(r'^my-tickets/', 'User.views.user_tickets'),

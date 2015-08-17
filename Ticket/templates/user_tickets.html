@@ -16,7 +16,7 @@
         <h2 style="padding-top: 50px; padding-bottom: 70px;">
             بلیت‌های خریداری‌شده‌ی قبلی شما:
         </h2>
-        <table class="table table-hover">
+        <table class="table">
             <thead>
             <th>رویداد</th>
             <th>تاریخ رویداد</th>
@@ -25,9 +25,9 @@
             </thead>
             <tbody>
             {% for bt in bought_tickets %}
-                <tr class="clickable-row" data-href="/ticket">
+                <tr class="clickable-row" data-href="/ticket/{{ bt.id }}/">
                 <td>
-                    {{ bt.ticket.event.title }}
+                    <a href="/ticket/{{ bt.id }}/" style="color: green">{{ bt.ticket.event.title }}</a>
                 </td>
                 <td>
                     {{ bt.ticket.event.date }}

@@ -1,3 +1,5 @@
+
+import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -63,7 +65,7 @@ def admin_all_events(request):
     events = []
     for event in all_events:
         tickets = Ticket.objects.filter(event=event)
-        sold_tickets = BoughtTicket.objects.filter(ticket__in=tickets)
+        sold_tickets = BoughtTicket.objects.filter(ticket__in=tickets).filter(payed=True)
         tickets_price = 0
         for t in sold_tickets:
             tickets_price += t.ticket.price

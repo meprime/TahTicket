@@ -39,40 +39,49 @@
                 </div>
                 <div class="col-md-7 ticket-body">
                         <h3>
-                        نمایش یک شب تنهایی
+                            {{ ticket.ticket.event.title }}
                         </h3>
                         <h4>
-                            مکان: تئاتر شهر
+مکان:
+                            {{ ticket.ticket.event.venue.name }}
                         </h4>
                         <p>
-                            آدرس: تقاطع خیابان ولیعصر و خیابان انقلاب
+آدرس:
+                            {{ ticket.ticket.event.venue.address }}
+                        </p>
+                        <p>
+                        تاریخ:
+                            {{ ticket.ticket.event.date }}
                         </p>
                         <p>
                             زمان:
-                            ۹۴/۰۸/۰۴،
-                            ساعت ۶ الی ۹
-                            </p>
+                            {{ ticket.ticket.event.time }}
+                        </p>
                         <p>
-                            شماره صندلی: ۵ب
+                            جایگاه:
+                            {{ ticket.ticket.type }}
                         </p>
                     </div>
                 <div class="col-md-3 stub">
                     <p>
-    شماره بلیط: 12123092asf2
+شماره بلیت:
+                        {{ ticket.payment.code }}
                     </p>
                     <p>
-                        رویداد: نمایش یک شب تنهایی
+رویداد:
+                        {{ ticket.ticket.event.title }}
                     </p>
                     <p>
-                        تاریخ:
-                        <em>۹۴/۰۸/۰۴</em>
+                    تاریخ:
+                        {{ ticket.ticket.event.date }}
                     </p>
                     <p>
                         زمان:
-                        <em>۹-۶</em>
+                        {{ ticket.ticket.event.time }}
                     </p>
                     <p>
-    شماره صندلی: ۵ب
+                        جایگاه:
+                        {{ ticket.ticket.type }}
                     </p>
                     </div>
             <div class="clearfix visible-md"></div>

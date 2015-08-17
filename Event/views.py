@@ -42,7 +42,7 @@ def admin_event(request, event_id):
         tickets.append({
             'type': tt.type,
             'capacity': tt.capacity,
-            'sold': BoughtTicket.objects.filter(ticket=tt).count(),
+            'sold': BoughtTicket.objects.filter(ticket=tt).filter(payed=True).count(),
             'price': tt.price,
         })
 
@@ -171,8 +171,11 @@ def remove_subtype(request, subtype_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def show_ticket(request):
-    return render(request, 'ticket.html')
+def show_ticket(request, ticket_id):
+    ticket = BoughtTicket.objects.filter(id=ticket_id)[0]
+    return render(request, 'ticket.html', {
+        'ticket': ticket,
+    })
 
 
 def details(request):
