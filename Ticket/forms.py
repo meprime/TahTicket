@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 class NewEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['organizer', 'type', 'rate']
+        exclude = ['organizer', 'type', 'rate', 'favorites']
 
         labels = {
             'title': _('عنوان'),

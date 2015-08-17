@@ -43,6 +43,7 @@ def admin_event(request, event_id):
             'type': tt.type,
             'capacity': tt.capacity,
             'sold': BoughtTicket.objects.filter(ticket=tt).count(),
+            'price': tt.price,
         })
 
     return render(request, 'organizer_event.html', {
